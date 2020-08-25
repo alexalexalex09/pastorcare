@@ -1,0 +1,23 @@
+/********************************/
+/*           Palette            */
+/********************************/
+:root {
+  /*--main-blue: #07f;*/
+  --primary: #fcca46;
+  --secondary: #fe7f2d;
+  --tertiary: #a1c181;
+  --background: #233d4d;
+  --alt: #619b8a;
+  --black: #000000;
+  --white: #ffffff;
+  --inactive: #666666;
+  --error: #dd2222;
+}
+
+/********************************/
+/*        Generic Styles        */
+/********************************/
+
+.off {
+  display: none;
+}
