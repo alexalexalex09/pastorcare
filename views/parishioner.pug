@@ -1,0 +1,32 @@
+extends index
+
+block parishioner
+  #parView.view.off
+    #parHeader.header
+      #parTitle New Parishioner
+      #parSave.saveIcon.icon
+      .menuIcon.icon
+    #parTextGroup.textGroup
+      #parParText.textInput
+        ion-icon(name='person')
+        input(type='text' autocomplete="off" value="Name")#parInput.noteInput
+      #noteTagText.textInput
+        ion-icon(name='calendar')
+        input(type='text' autocomplete="off" value="Birthday")#tagInput.noteInput
+      #noteDateText.textInput
+        ion-icon(name='calendar')
+        input(type='text' autocomplete="off" value="Anniversary")#noteDateInput.noteInput
+      #noteDateText.textInput
+        ion-icon(name='person')
+        input(type='text' autocomplete="off" value="Occupation")#noteDateInput.noteInput
+      #noteDateText.textInput
+        ion-icon(name='category')
+        input(type='text' autocomplete="off" value="Relationships")#noteDateInput.noteInput
+      #noteDateText.textInput
+        ion-icon(name='category')
+        input(type='text' autocomplete="off" value="Groups")#noteDateInput.noteInput
+    #parNotes
+      #parNoteHeader
+        #addParNote
+          ion-icon(name="plus")
+        #parNoteTitle Notes
