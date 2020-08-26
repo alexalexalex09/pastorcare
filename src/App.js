@@ -1,24 +1,56 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import "./App.css";
+
+class Cloud extends React.Component {
+  render() {
+    return <div id={this.props.id} className="cloud backgroundImg"></div>;
+  }
+  componentDidMount() {
+    const el = ReactDOM.findDOMNode(this);
+    setTimeout(function () {
+      el.classList.add("cloudMove");
+    }, 100);
+  }
+}
 
 function App() {
   return (
     <div className="App">
       <div className="view" id="homeView">
+        <div id="churchImg" className="backgroundImg"></div>
+        <Cloud id="cloudA"></Cloud>
+        <Cloud id="cloudB"></Cloud>
         <div className="header" id="homeHeader">
-          <div id="mainTitle">PastorCare</div>
-          <div className="menuIcon icon"></div>
+          <div id="mainTitle">LovingCare</div>
+          <div className="menuIcon icon">
+            <ion-icon name="menu"></ion-icon>
+          </div>
         </div>
         <div id="mainButtons">
-          <div className="mainIcon icon" id="logBookIcon"></div>
-          <div className="mainIcon icon" id="directoryIcon"></div>
-          <div className="mainIcon icon" id="newNoteIcon"></div>
-          <div className="mainIcon icon" id="newParIcon"></div>
+          <div className="mainIcon icon" id="logBookIcon">
+            <ion-icon name="book-outline"></ion-icon>
+            <span>Logbook</span>
+          </div>
+          <div className="mainIcon icon" id="directoryIcon">
+            <ion-icon name="people"></ion-icon>
+            <span>Directory</span>
+          </div>
+          <div className="mainIcon icon" id="newNoteIcon">
+            <ion-icon name="add-outline"></ion-icon>
+            <span>Add New Note</span>
+          </div>
+          <div className="mainIcon icon" id="newParIcon">
+            <ion-icon name="person-add"></ion-icon>
+            <span>New Parishioner</span>
+          </div>
         </div>
       </div>
       <div className="view off" id="logbookView">
         <div className="header" id="logbookHeader">
-          <div id="logbookTitle">Logbook</div>
+          <div id="logbookTitle">
+            <span>Logbook</span>
+          </div>
           <div className="logbookIcon icon" id="filterIcon"></div>
           <div className="menuIcon icon"></div>
         </div>
@@ -26,7 +58,9 @@ function App() {
       </div>
       <div className="view off" id="directoryView">
         <div className="header" id="directoryHeader">
-          <div id="directoryTitle">Directory</div>
+          <div id="directoryTitle">
+            <span>Directory</span>
+          </div>
           <div className="menuIcon icon"></div>
         </div>
         <div id="directory"></div>
