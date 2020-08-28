@@ -32,6 +32,10 @@
   font-size: max(3 * (1vw + 1vh) / 2, 18px);
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--background);
   color: var(--white);
@@ -47,6 +51,7 @@ ion-icon {
 
 .menuIcon ion-icon {
   font-size: 48px;
+  cursor: pointer;
 }
 
 .backgroundImg {
@@ -55,25 +60,45 @@ ion-icon {
   background-position: center;
 }
 
+.view {
+  transition: 0.5s all;
+}
+
+.viewBody {
+  width: 90vw;
+  height: 85vh;
+  top: 10vh;
+  left: 5vw;
+  position: absolute;
+}
+
+.mainTitle {
+  margin-left: 2vw;
+}
+
+.mainTitle span {
+  font-size: 38px;
+  cursor: pointer;
+}
+
+.extraIcon ion-icon {
+  cursor: pointer;
+}
+
 /********************************/
 /*           Main View          */
 /********************************/
 
-div#homeHeader {
+.header {
   height: 64px;
   width: 100vw;
   position: absolute;
   display: grid;
-  grid-template-columns: 1fr calc(48px + 2vw);
+  grid-template-columns: 1fr calc(48px + 2vw) calc(48px + 2vw);
   grid-template-rows: 64px;
   align-items: center;
   top: 0;
   left: 0;
-}
-
-div#mainTitle {
-  font-size: 38px;
-  margin-left: 2vw;
 }
 
 #homeHeader .menuIcon {
@@ -93,7 +118,7 @@ div#mainButtons {
   align-items: center;
 }
 
-.mainIcon ion-icon {
+.mainButton ion-icon {
   font-size: max(3.5 * (1vw + 1vh) / 2, 36px);
   border-radius: 100px;
   padding: 8px;
@@ -101,7 +126,7 @@ div#mainButtons {
   background-color: var(--secondary);
 }
 
-.mainIcon {
+.mainButton {
   justify-items: center;
   justify-content: center;
   align-content: center;
@@ -115,15 +140,16 @@ div#mainButtons {
   height: 80%;
   box-sizing: border-box;
   background-color: var(--primary);
+  cursor: pointer;
 }
 
 #churchImg {
-  background-image: url("./church2.svg");
+  background-image: url("./church.svg");
   position: absolute;
-  top: 20vh;
+  bottom: 55vh;
   left: 5vw;
   width: 90vw;
-  height: 35vw;
+  height: 20vh;
 }
 
 div#churchRoad {
@@ -141,6 +167,7 @@ div.cloud {
   height: 15vh;
   background-image: url("./cloud.svg");
   transition: transform 8s;
+  overflow: hidden;
 }
 
 div#cloudA.cloudMove,
@@ -159,3 +186,7 @@ div#cloudB {
   right: 12vw;
   transform: translateX(100vw);
 }
+
+/********************************/
+/*         Logbook View         */
+/********************************/
