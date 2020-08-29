@@ -4,265 +4,15 @@ import "./App.css";
 
 //Components
 import Header from "./components/Header";
-import CustomEditor from "./components/CustomEditor";
+import NoteEditor from "./components/NoteEditor";
+import PersonEditor from "./components/PersonEditor";
+import Cloud from "./components/Cloud";
+import MainButton from "./components/MainButton";
+import Log from "./components/Log";
+import EntryItem from "./components/EntryItem";
+
 //Helpers
-import h from "./helpers/h";
-
-/*Example Functional Component*/
-/* Const because the function doesn't change. It accepts all properties in the JSX    */
-const Cloud = (props) => {
-  /* You can include whatever functions you'd like within the component as normal       */
-  const startClouds = function () {
-    setTimeout(function () {
-      const clouds = h.findClass("cloud");
-      for (var i = 0; i < clouds.length; i++) {
-        clouds[i].classList.add("cloudMove");
-      }
-    }, 100);
-  };
-  /* You can also add event listeners as usual */
-  window.addEventListener("onload", startClouds());
-  /* Just return JSX to render. I think you can enclose multiple elements in a fragment? */
-  return <div id={props.id} className="cloud backgroundImg"></div>;
-};
-
-const MainButton = (props) => {
-  return (
-    <div
-      className="mainButton icon"
-      id={props.id}
-      onClick={(e) => h.openView(e, props.open, props.close)}
-    >
-      <ion-icon name={props.ionIcon}></ion-icon>
-      <span>{props.title}</span>
-    </div>
-  );
-};
-
-const NoteEditor = (props) => {
-  return (
-    <div className={"noteEditor " + props.className}>
-      <Header
-        id={"noteHeader" + props.id}
-        title={props.title}
-        icon="save-outline"
-      ></Header>
-      <div className="viewBody">
-        <CustomEditor></CustomEditor>
-        <div className="textGroup" id={"noteTextGroup" + props.id}>
-          <div className="textInput" id={"noteParText" + props.id}>
-            <ion-icon name="person"></ion-icon>
-            <label htmlFor="parNameInput" className="off">
-              Attach to Parishioner
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              defaultValue="Attach to Parishioner"
-              id={"parNameInput" + props.id}
-            />
-            <div
-              className="autocomplete"
-              id={"parAutocomplete" + props.id}
-            ></div>
-          </div>
-          <label htmlFor={"tagInput" + props.id} className="off">
-            Tags
-          </label>
-          <div className="textInput" id={"noteTagText" + props.id}>
-            <ion-icon name="pricetags-outline"></ion-icon>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              defaultValue="Tags"
-              id={"tagInput" + props.id}
-            />
-            <div
-              className="autocomplete"
-              id={"catAutocomplete" + props.id}
-            ></div>
-          </div>
-          <label htmlFor="noteDateInput" className="off">
-            Date
-          </label>
-          <div className="textInput" id={"noteDateText" + props.id}>
-            <ion-icon name="calendar"></ion-icon>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              defaultValue="Date"
-              id={"noteDateInput" + props.id}
-            />
-          </div>
-        </div>
-        <div id={"noteCheckGroup" + props.id}>
-          <div id={"emailSelf" + props.id}>
-            <input type="checkbox" id={"emailSelfCB" + props.id} />
-            <label htmlFor="emailSelfCB">Email to Myself</label>
-          </div>
-          <div id={"prayerRequest" + props.id}>
-            <input type="checkbox" id={"prayerRequestCB" + props.id} />
-            <label htmlFor="prayerRequestCB">Send as prayer request</label>
-          </div>
-          <div id={"nextDay" + props.id}>
-            <input type="checkbox" id={"nextDayCB" + props.id} />
-            <label htmlFor="nextDayCB">Next day reminder</label>
-          </div>
-          <div id={"nextMonday" + props.id}>
-            <input type="checkbox" id={"nextMondayCB" + props.id} />
-            <label htmlFor="nextMondayCB">Next Monday reminder</label>
-          </div>
-          <div id={"interaction" + props.id}>
-            <input type="checkbox" id={"interactionCB" + props.id} />
-            <label htmlFor="interactionCB">Log as interaction</label>
-          </div>
-          <div id={"addToBio" + props.id}>
-            <input type="checkbox" id={"addToBioCB" + props.id} />
-            <label htmlFor="addToBioCB">Add to bio</label>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ParEditor = (props) => {
-  return (
-    <div className={"parEditor " + props.className}>
-      <Header
-        id={"parHeader" + props.id}
-        title="New Parishioner"
-        icon="save-outline"
-      ></Header>
-      <div className="viewBody">
-        <div className="textGroup" id={"parTextGroup" + props.id}>
-          <div className="textInput" id={"parParText" + props.id}>
-            <ion-icon name="person"></ion-icon>
-            <label htmlFor="parInput" className="off">
-              Name
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              defaultValue="Name"
-              id={"parInput" + props.id}
-            />
-          </div>
-          <div className="textInput" id={"noteTagText" + props.id}>
-            <ion-icon name="gift-outline"></ion-icon>
-            <label htmlFor="birthdayInput" className="off">
-              Birthday
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              defaultValue="Birthday"
-              id={"birthdayInput" + props.id}
-            />
-          </div>
-          <div className="textInput" id={"noteDateText" + props.id}>
-            <ion-icon name="rose-outline"></ion-icon>
-            <label htmlFor="anniversaryInput" className="off">
-              Anniversary
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              defaultValue="Anniversary"
-              id={"anniversaryInput" + props.id}
-            />
-          </div>
-          <div className="textInput" id={"noteDateText" + props.id}>
-            <ion-icon name="briefcase-outline"></ion-icon>
-            <label htmlFor="occupationInput" className="off">
-              Occupation
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              defaultValue="Occupation"
-              id={"occupationInput" + props.id}
-            />
-          </div>
-          <div className="textInput" id={"noteDateText" + props.id}>
-            <ion-icon name="git-merge-outline"></ion-icon>
-            <label htmlFor="relationshipsInput" className="off">
-              Relationships
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              defaultValue="Relationships"
-              id={"relationshipsInput" + props.id}
-            />
-          </div>
-          <div className="textInput" id={"noteDateText" + props.id}>
-            <ion-icon name="color-filter-outline"></ion-icon>
-            <label htmlFor="groupsInput" className="off">
-              Groups
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              defaultValue="Groups"
-              id={"groupsInput" + props.id}
-            />
-          </div>
-        </div>
-        <div id={"parNotes" + props.id}>
-          <div id={"parNoteHeader" + props.id}>
-            <div id={"addParNote" + props.id}>
-              <ion-icon name="add-outline"></ion-icon>
-            </div>
-            <div id={"parNoteTitle" + props.id}>Notes</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const Log = (props) => {
-  return (
-    <div className="log listItem">
-      <div className="listItemHeading">Log Heading</div>
-      <div className="listItemPreview">
-        This is a preview of the log entry. Many interesting things will be
-        included here
-      </div>
-      <NoteEditor
-        className="off"
-        title="Note about something important"
-        id={props.id}
-      />
-    </div>
-  );
-};
-
-const EntryItem = (props) => {
-  return (
-    <div className="entryItem listItem">
-      <div className="listItemHeading">John Doe</div>
-
-      <div className="listItemPreview">
-        <div className="entryItemPhone">123-456-7890</div>
-        <div className="entryItemAddress">
-          123 W Main St., Malvern, PA 19355
-        </div>
-        <ParEditor className="off" id={props.id} />
-      </div>
-    </div>
-  );
-};
+//import h from "./helpers/h";
 
 function App() {
   return (
@@ -296,10 +46,10 @@ function App() {
             close="homeView"
           />
           <MainButton
-            id="newParIcon"
+            id="newPersonIcon"
             ionIcon="person-add"
-            title="New Parishioner"
-            open="parView"
+            title="New Person"
+            open="personView"
             close="homeView"
           />
         </div>
@@ -345,8 +95,8 @@ function App() {
       <div className="view off" id="noteView">
         <NoteEditor title="New Note"></NoteEditor>
       </div>
-      <div className="view off" id="parView">
-        <ParEditor title="New Parishioner"></ParEditor>
+      <div className="view off" id="personView">
+        <PersonEditor title="New Person"></PersonEditor>
       </div>
     </div>
   );

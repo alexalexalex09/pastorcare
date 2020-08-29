@@ -14,7 +14,7 @@ const Header = (props) => {
   return (
     <div className="header" id={props.id}>
       <div
-        className="mainTitle"
+        className="homeButton backgroundImg"
         onClick={(e) =>
           h.openView(
             e,
@@ -22,7 +22,8 @@ const Header = (props) => {
             h.notClass(h.findClass("view"), "off")[0].id
           )
         }
-      >
+      ></div>
+      <div className="mainTitle">
         <span>{props.title}</span>
       </div>
       {extraIcon}
