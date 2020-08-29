@@ -11,31 +11,37 @@ const Editor = () => {
   const { getRootProps, active, commands } = useRemirror({ autoUpdate: true });
 
   return (
-    <div>
-      <button
-        onClick={() => commands.toggleBold()}
-        style={{ fontWeight: active.bold() ? "bold" : undefined }}
-      >
-        <i className="fas fa-bold"></i>
-      </button>
-      <button
-        onClick={() => commands.toggleItalic()}
-        style={{ fontStyle: active.italic() ? "italic" : undefined }}
-      >
-        <i className="fas fa-italic"></i>
-      </button>
-      <button
-        onClick={() => commands.toggleUnderline()}
-        style={{ textDecoration: active.underline() ? "underline" : undefined }}
-      >
-        <i className="fas fa-underline"></i>
-      </button>
-      <button
-        onClick={() => commands.toggleStrike()}
-        style={{ textDecoration: active.strike() ? "line-through" : undefined }}
-      >
-        <i className="fas fa-strikethrough"></i>
-      </button>
+    <div className="customEditor">
+      <div className="customEditorMenu">
+        <button
+          onClick={() => commands.toggleBold()}
+          style={{ fontWeight: active.bold() ? "bold" : undefined }}
+        >
+          <i className="fas fa-bold"></i>
+        </button>
+        <button
+          onClick={() => commands.toggleItalic()}
+          style={{ fontStyle: active.italic() ? "italic" : undefined }}
+        >
+          <i className="fas fa-italic"></i>
+        </button>
+        <button
+          onClick={() => commands.toggleUnderline()}
+          style={{
+            textDecoration: active.underline() ? "underline" : undefined,
+          }}
+        >
+          <i className="fas fa-underline"></i>
+        </button>
+        <button
+          onClick={() => commands.toggleStrike()}
+          style={{
+            textDecoration: active.strike() ? "line-through" : undefined,
+          }}
+        >
+          <i className="fas fa-strikethrough"></i>
+        </button>
+      </div>
       <div className="editor" {...getRootProps()} />
     </div>
   );

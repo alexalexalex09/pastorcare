@@ -47,6 +47,14 @@ p {
   margin: 0;
 }
 
+button {
+  border-radius: 5px;
+  box-shadow: none;
+  border: 1px solid var(--white);
+  background-color: var(--primary);
+  color: var(--white);
+}
+
 .off {
   display: none;
 }
@@ -243,6 +251,10 @@ div#cloudB {
   font-size: 1em;
 }
 
+/********************************/
+/*           Note View          */
+/********************************/
+
 .editor {
   height: 40vh;
   border: 1px solid white;
@@ -260,4 +272,89 @@ div#cloudB {
   width: 100%;
   padding: 5px;
   box-sizing: border-box;
+}
+
+.textInput {
+  margin-bottom: 5px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.5em 1fr;
+}
+
+.textInput ion-icon {
+  align-self: center;
+  justify-self: center;
+}
+
+.editorSaveButton {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  text-align: center;
+}
+
+.editorSaveButton button {
+  width: 40vw;
+  height: 2em;
+}
+
+.customEditorMenu button {
+  width: 8vw;
+  height: 8vw;
+  margin-right: 5px;
+}
+
+/********************************/
+/*         Person View          */
+/********************************/
+
+.personEditor .textInput {
+  margin-bottom: 2.5vh;
+}
+
+.personNotes {
+  height: 40vh;
+  border: 1px solid var(--white);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.personNoteHeader {
+  display: grid;
+  grid-template-columns: 1.5em 1fr;
+  font-size: max(5 * (1vw + 1vh) / 2, 22px);
+  border-bottom: 1px solid var(--white);
+  padding: 5px;
+  height: max(6 * (1vw + 1vh) / 2, 22px);
+}
+
+.addPersonHeader ion-icon {
+  align-self: center;
+  justify-self: center;
+}
+
+.personNoteHeader ion-icon,
+.personNoteHeader .personNoteTitle {
+  font-size: max(5 * (1vw + 1vh) / 2, 22px);
+  align-self: center;
+}
+
+.personNoteHeader ion-icon {
+  justify-self: center;
+}
+.personNoteHeader .personNoteTitle {
+  justify-self: left;
+}
+
+.personNotePreviews {
+  height: calc(100% - 20px - max(6 * (1vw + 1vh) / 2, 22px));
+  overflow-y: auto;
+}
+
+.personNotePreview {
+  overflow-y: hidden;
+  height: calc(2.5em + 4px);
+  border-bottom: 1px solid var(--white);
+  box-sizing: border-box;
+  padding: 3px;
 }

@@ -1,17 +1,24 @@
 import React from "react";
 import Header from "./Header";
+import p from "../helpers/p";
 
 const PersonEditor = (props) => {
   return (
-    <div className={"personEditor " + props.className}>
+    <div className={p.appendID(props.className, "personEditor ", "-")}>
       <Header
-        id={"personHeader" + props.id}
+        id={p.appendID(props.id, "personHeader", "-")}
         title="New Person"
         icon="save-outline"
       ></Header>
       <div className="viewBody">
-        <div className="textGroup" id={"personTextGroup" + props.id}>
-          <div className="textInput" id={"personText" + props.id}>
+        <div
+          className="textGroup"
+          id={p.appendID(props.id, "personTextGroup", "-")}
+        >
+          <div
+            className="textInput"
+            id={p.appendID(props.id, "personText", "-")}
+          >
             <ion-icon name="person"></ion-icon>
             <label htmlFor="personInput" className="off">
               Name
@@ -20,11 +27,14 @@ const PersonEditor = (props) => {
               className="noteInput"
               type="text"
               autoComplete="off"
-              defaultValue="Name"
-              id={"personInput" + props.id}
+              placeholder="Name"
+              id={p.appendID(props.id, "personInput", "-")}
             />
           </div>
-          <div className="textInput" id={"noteTagText" + props.id}>
+          <div
+            className="textInput"
+            id={p.appendID(props.id, "noteTagText", "-")}
+          >
             <ion-icon name="gift-outline"></ion-icon>
             <label htmlFor="birthdayInput" className="off">
               Birthday
@@ -33,11 +43,14 @@ const PersonEditor = (props) => {
               className="noteInput"
               type="text"
               autoComplete="off"
-              defaultValue="Birthday"
-              id={"birthdayInput" + props.id}
+              placeholder="Birthday"
+              id={p.appendID(props.id, "birthdayInput", "-")}
             />
           </div>
-          <div className="textInput" id={"noteDateText" + props.id}>
+          <div
+            className="textInput"
+            id={p.appendID(props.id, "noteDateText", "-")}
+          >
             <ion-icon name="rose-outline"></ion-icon>
             <label htmlFor="anniversaryInput" className="off">
               Anniversary
@@ -46,11 +59,14 @@ const PersonEditor = (props) => {
               className="noteInput"
               type="text"
               autoComplete="off"
-              defaultValue="Anniversary"
-              id={"anniversaryInput" + props.id}
+              placeholder="Anniversary"
+              id={p.appendID(props.id, "anniversaryInput", "-")}
             />
           </div>
-          <div className="textInput" id={"noteDateText" + props.id}>
+          <div
+            className="textInput"
+            id={p.appendID(props.id, "noteDateText", "-")}
+          >
             <ion-icon name="briefcase-outline"></ion-icon>
             <label htmlFor="occupationInput" className="off">
               Occupation
@@ -59,11 +75,14 @@ const PersonEditor = (props) => {
               className="noteInput"
               type="text"
               autoComplete="off"
-              defaultValue="Occupation"
-              id={"occupationInput" + props.id}
+              placeholder="Occupation"
+              id={p.appendID(props.id, "occupationInput", "-")}
             />
           </div>
-          <div className="textInput" id={"noteDateText" + props.id}>
+          <div
+            className="textInput"
+            id={p.appendID(props.id, "noteDateText", "-")}
+          >
             <ion-icon name="git-merge-outline"></ion-icon>
             <label htmlFor="relationshipsInput" className="off">
               Relationships
@@ -72,11 +91,14 @@ const PersonEditor = (props) => {
               className="noteInput"
               type="text"
               autoComplete="off"
-              defaultValue="Relationships"
-              id={"relationshipsInput" + props.id}
+              placeholder="Relationships"
+              id={p.appendID(props.id, "relationshipsInput", "-")}
             />
           </div>
-          <div className="textInput" id={"noteDateText" + props.id}>
+          <div
+            className="textInput"
+            id={p.appendID(props.id, "noteDateText", "-")}
+          >
             <ion-icon name="color-filter-outline"></ion-icon>
             <label htmlFor="groupsInput" className="off">
               Groups
@@ -85,17 +107,48 @@ const PersonEditor = (props) => {
               className="noteInput"
               type="text"
               autoComplete="off"
-              defaultValue="Groups"
-              id={"groupsInput" + props.id}
+              placeholder="Groups"
+              id={p.appendID(props.id, "groupsInput", "-")}
             />
           </div>
         </div>
-        <div id={"personNotes" + props.id}>
-          <div id={"personNoteHeader" + props.id}>
-            <div id={"addPersonNote" + props.id}>
-              <ion-icon name="add-outline"></ion-icon>
+        <div
+          id={p.appendID(props.id, "personNotes", "-")}
+          className="personNotes"
+        >
+          <div className="personNoteHeader">
+            <ion-icon name="add-circle-outline"></ion-icon>
+            <div className="personNoteTitle">Notes</div>
+          </div>
+          <div className="personNotePreviews">
+            <div className="personNotePreview">
+              Here is where a brief preview of each note will appear, giving you
+              an idea of what the note is about
             </div>
-            <div id={"personNoteTitle" + props.id}>Notes</div>
+            <div className="personNotePreview">
+              Here is where a brief preview of each note will appear, giving you
+              an idea of what the note is about
+            </div>
+            <div className="personNotePreview">
+              Here is where a brief preview of each note will appear, giving you
+              an idea of what the note is about
+            </div>
+            <div className="personNotePreview">
+              Here is where a brief preview of each note will appear, giving you
+              an idea of what the note is about
+            </div>
+            <div className="personNotePreview">
+              Here is where a brief preview of each note will appear, giving you
+              an idea of what the note is about
+            </div>
+            <div className="personNotePreview">
+              Here is where a brief preview of each note will appear, giving you
+              an idea of what the note is about
+            </div>
+            <div className="personNotePreview">
+              Here is where a brief preview of each note will appear, giving you
+              an idea of what the note is about
+            </div>
           </div>
         </div>
       </div>

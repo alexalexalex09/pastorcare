@@ -5,7 +5,7 @@ import p from "../helpers/p";
 
 const NoteEditor = (props) => {
   return (
-    <div className={p.appendID(props.className, "noteEditor", "-")}>
+    <div className={p.appendID(props.className, "noteEditor", " ")}>
       <Header
         id={p.appendID(props.id, "noteHeader", "-")}
         title={props.title}
@@ -118,6 +118,9 @@ const NoteEditor = (props) => {
             />
             <label htmlFor="addToBioCB">Add to bio</label>
           </div>
+        </div>
+        <div className="editorSaveButton">
+          <button>Save</button>
         </div>
       </div>
     </div>
