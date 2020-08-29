@@ -93,7 +93,7 @@ function App() {
         </div>
       </div>
       <div className="view off" id="noteView">
-        <NoteEditor title="New Note"></NoteEditor>
+        <NoteEditor title="New Note" id="newNote"></NoteEditor>
       </div>
       <div className="view off" id="personView">
         <PersonEditor title="New Person"></PersonEditor>
