@@ -41,6 +41,12 @@ body {
   color: var(--white);
 }
 
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin: 0;
+}
+
 .off {
   display: none;
 }
@@ -65,10 +71,10 @@ ion-icon {
 }
 
 .viewBody {
-  width: 90vw;
+  width: 90%;
   height: 85vh;
   top: 10vh;
-  left: 5vw;
+  left: 5%;
   position: absolute;
 }
 
@@ -91,14 +97,16 @@ ion-icon {
 
 .header {
   height: 64px;
-  width: 100vw;
-  position: absolute;
+  width: 100%;
+  position: fixed;
   display: grid;
-  grid-template-columns: 1fr calc(48px + 2vw) calc(48px + 2vw);
+  grid-template-columns: 1fr calc(48px + 2vw) calc(48px + 2vw) 2vw;
   grid-template-rows: 64px;
   align-items: center;
   top: 0;
   left: 0;
+  background-color: var(--background);
+  z-index: 100;
 }
 
 #homeHeader .menuIcon {
@@ -190,3 +198,46 @@ div#cloudB {
 /********************************/
 /*         Logbook View         */
 /********************************/
+
+.listItem {
+  border: 1px solid white;
+  border-radius: 7px;
+  margin-bottom: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.listItemHeading {
+  text-decoration: underline;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.listItemPreview {
+  font-size: 0.9em;
+  overflow: hidden;
+  max-height: 2.4em;
+}
+
+.listItemPreview div {
+  font-size: 1em;
+}
+
+.editor {
+  height: 40vh;
+  border: 1px solid white;
+  margin: 5px 0px;
+  border-radius: 3px;
+  background-color: var(--white);
+  color: var(--black);
+  box-sizing: border-box;
+  white-space: pre-wrap;
+}
+
+.ProseMirror.remirror-editor {
+  height: 100%;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}

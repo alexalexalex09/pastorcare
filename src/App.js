@@ -4,7 +4,7 @@ import "./App.css";
 
 //Components
 import Header from "./components/Header";
-
+import CustomEditor from "./components/CustomEditor";
 //Helpers
 import h from "./helpers/h";
 
@@ -48,6 +48,7 @@ const NoteEditor = (props) => {
         icon="save-outline"
       ></Header>
       <div className="viewBody">
+        <CustomEditor></CustomEditor>
         <div className="textGroup" id={"noteTextGroup" + props.id}>
           <div className="textInput" id={"noteParText" + props.id}>
             <ion-icon name="person"></ion-icon>
@@ -130,7 +131,7 @@ const NoteEditor = (props) => {
 
 const ParEditor = (props) => {
   return (
-    <div className="parEditor">
+    <div className={"parEditor " + props.className}>
       <Header
         id={"parHeader" + props.id}
         title="New Parishioner"
@@ -232,9 +233,9 @@ const ParEditor = (props) => {
 
 const Log = (props) => {
   return (
-    <div className="log">
-      <div className="logHeading">Log Heading</div>
-      <div className="logPreview">
+    <div className="log listItem">
+      <div className="listItemHeading">Log Heading</div>
+      <div className="listItemPreview">
         This is a preview of the log entry. Many interesting things will be
         included here
       </div>
@@ -243,6 +244,22 @@ const Log = (props) => {
         title="Note about something important"
         id={props.id}
       />
+    </div>
+  );
+};
+
+const EntryItem = (props) => {
+  return (
+    <div className="entryItem listItem">
+      <div className="listItemHeading">John Doe</div>
+
+      <div className="listItemPreview">
+        <div className="entryItemPhone">123-456-7890</div>
+        <div className="entryItemAddress">
+          123 W Main St., Malvern, PA 19355
+        </div>
+        <ParEditor className="off" id={props.id} />
+      </div>
     </div>
   );
 };
@@ -301,13 +318,28 @@ function App() {
             <Log id="4" />
             <Log id="5" />
             <Log id="6" />
+            <Log id="7" />
+            <Log id="8" />
+            <Log id="9" />
+            <Log id="10" />
           </div>
         </div>
       </div>
       <div className="view off" id="directoryView">
-        <Header id="directoryHeader" title="Directory"></Header>
+        <Header id="directoryHeader" title="Directory" icon="search"></Header>
         <div className="viewBody">
-          <div id="directory">Directory Entries</div>
+          <div id="directory">
+            <EntryItem id="1" />
+            <EntryItem id="2" />
+            <EntryItem id="3" />
+            <EntryItem id="4" />
+            <EntryItem id="5" />
+            <EntryItem id="6" />
+            <EntryItem id="7" />
+            <EntryItem id="8" />
+            <EntryItem id="9" />
+            <EntryItem id="10" />
+          </div>
         </div>
       </div>
       <div className="view off" id="noteView">
