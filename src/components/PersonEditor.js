@@ -4,7 +4,7 @@ import p from "../helpers/p";
 
 const PersonEditor = (props) => {
   return (
-    <div className={p.appendID(props.className, "personEditor ", "-")}>
+    <div className={p.appendID(props.className, "personEditor ", " ")}>
       <Header
         id={p.appendID(props.id, "personHeader", "-")}
         title="New Person"
@@ -19,7 +19,7 @@ const PersonEditor = (props) => {
             className="textInput"
             id={p.appendID(props.id, "personText", "-")}
           >
-            <ion-icon name="person"></ion-icon>
+            <i className="fas fa-user"></i>
             <label htmlFor="personInput" className="off">
               Name
             </label>
@@ -35,13 +35,13 @@ const PersonEditor = (props) => {
             className="textInput"
             id={p.appendID(props.id, "noteTagText", "-")}
           >
-            <ion-icon name="gift-outline"></ion-icon>
+            <i className="fas fa-gift"></i>
             <label htmlFor="birthdayInput" className="off">
               Birthday
             </label>
             <input
               className="noteInput"
-              type="text"
+              type="date"
               autoComplete="off"
               placeholder="Birthday"
               id={p.appendID(props.id, "birthdayInput", "-")}
@@ -51,13 +51,13 @@ const PersonEditor = (props) => {
             className="textInput"
             id={p.appendID(props.id, "noteDateText", "-")}
           >
-            <ion-icon name="rose-outline"></ion-icon>
+            <i className="fas fa-ring"></i>
             <label htmlFor="anniversaryInput" className="off">
               Anniversary
             </label>
             <input
               className="noteInput"
-              type="text"
+              type="date"
               autoComplete="off"
               placeholder="Anniversary"
               id={p.appendID(props.id, "anniversaryInput", "-")}
@@ -67,7 +67,7 @@ const PersonEditor = (props) => {
             className="textInput"
             id={p.appendID(props.id, "noteDateText", "-")}
           >
-            <ion-icon name="briefcase-outline"></ion-icon>
+            <i className="fas fa-briefcase"></i>
             <label htmlFor="occupationInput" className="off">
               Occupation
             </label>
@@ -78,12 +78,16 @@ const PersonEditor = (props) => {
               placeholder="Occupation"
               id={p.appendID(props.id, "occupationInput", "-")}
             />
+            <div
+              className="tagList"
+              id={p.appendID(props.id, "occupationList", "-")}
+            ></div>
           </div>
           <div
             className="textInput"
             id={p.appendID(props.id, "noteDateText", "-")}
           >
-            <ion-icon name="git-merge-outline"></ion-icon>
+            <i className="fas fa-project-diagram"></i>
             <label htmlFor="relationshipsInput" className="off">
               Relationships
             </label>
@@ -94,12 +98,16 @@ const PersonEditor = (props) => {
               placeholder="Relationships"
               id={p.appendID(props.id, "relationshipsInput", "-")}
             />
+            <div
+              className="tagList"
+              id={p.appendID(props.id, "relationshipsList", "-")}
+            ></div>
           </div>
           <div
             className="textInput"
             id={p.appendID(props.id, "noteDateText", "-")}
           >
-            <ion-icon name="color-filter-outline"></ion-icon>
+            <i className="fas fa-users"></i>
             <label htmlFor="groupsInput" className="off">
               Groups
             </label>
@@ -110,6 +118,10 @@ const PersonEditor = (props) => {
               placeholder="Groups"
               id={p.appendID(props.id, "groupsInput", "-")}
             />
+            <div
+              className="tagList"
+              id={p.appendID(props.id, "groupsList", "-")}
+            ></div>
           </div>
         </div>
         <div
@@ -117,7 +129,7 @@ const PersonEditor = (props) => {
           className="personNotes"
         >
           <div className="personNoteHeader">
-            <ion-icon name="add-circle-outline"></ion-icon>
+            <i className="fas fa-plus-circle"></i>
             <div className="personNoteTitle">Notes</div>
           </div>
           <div className="personNotePreviews">

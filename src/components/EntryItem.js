@@ -1,5 +1,5 @@
 import React from "react";
-import ParEditor from "./PersonEditor";
+import PersonEditor from "./PersonEditor";
 
 const EntryItem = (props) => {
   return (
@@ -11,7 +11,7 @@ const EntryItem = (props) => {
         <div className="entryItemAddress">
           123 W Main St., Malvern, PA 19355
         </div>
-        <ParEditor className="off" id={props.id} />
+        <PersonEditor className="off" id={props.id} />
       </div>
     </div>
   );

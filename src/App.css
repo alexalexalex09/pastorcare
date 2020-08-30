@@ -59,11 +59,11 @@ button {
   display: none;
 }
 
-ion-icon {
+.fas {
   color: var(--white);
 }
 
-.menuIcon ion-icon {
+.menuIcon .fas {
   font-size: 48px;
   cursor: pointer;
 }
@@ -103,7 +103,7 @@ ion-icon {
   cursor: pointer;
 }
 
-.extraIcon ion-icon {
+.extraIcon .fas {
   cursor: pointer;
 }
 
@@ -133,7 +133,7 @@ ion-icon {
   align-content: center;
 }
 
-.extraIcon ion-icon {
+.extraIcon .fas {
   font-size: 1.3em;
 }
 
@@ -154,12 +154,13 @@ div#mainButtons {
   align-items: center;
 }
 
-.mainButton ion-icon {
+.mainButton .fas {
   font-size: max(3.5 * (1vw + 1vh) / 2, 36px);
   border-radius: 100px;
   padding: 8px;
   border: 4px solid var(--white);
   background-color: var(--secondary);
+  line-height: 1.25em;
 }
 
 .mainButton {
@@ -281,7 +282,7 @@ div#cloudB {
   grid-template-columns: 1.5em 1fr;
 }
 
-.textInput ion-icon {
+.textInput .fas {
   align-self: center;
   justify-self: center;
 }
@@ -328,18 +329,18 @@ div#cloudB {
   height: max(6 * (1vw + 1vh) / 2, 22px);
 }
 
-.addPersonHeader ion-icon {
+.addPersonHeader .fas {
   align-self: center;
   justify-self: center;
 }
 
-.personNoteHeader ion-icon,
+.personNoteHeader .fas,
 .personNoteHeader .personNoteTitle {
   font-size: max(5 * (1vw + 1vh) / 2, 22px);
   align-self: center;
 }
 
-.personNoteHeader ion-icon {
+.personNoteHeader .fas {
   justify-self: center;
 }
 .personNoteHeader .personNoteTitle {

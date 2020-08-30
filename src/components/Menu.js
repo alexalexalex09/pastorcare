@@ -3,7 +3,7 @@ import React from "react";
 const Menu = (props) => {
   return (
     <div className="menuIcon icon">
-      <ion-icon name="menu"></ion-icon>
+      <i className="fas fa-bars"></i>
     </div>
   );
 };

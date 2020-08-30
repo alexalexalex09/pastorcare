@@ -8,7 +8,7 @@ const MainButton = (props) => {
       id={props.id}
       onClick={(e) => h.openView(e, props.open, props.close)}
     >
-      <ion-icon name={props.ionIcon}></ion-icon>
+      <i className={"fas fa-lg fa-fw " + props.ionIcon}></i>
       <span>{props.title}</span>
     </div>
   );

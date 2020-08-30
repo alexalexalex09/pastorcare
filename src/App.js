@@ -26,28 +26,28 @@ function App() {
         <div id="mainButtons">
           <MainButton
             id="logBookIcon"
-            ionIcon="book-outline"
+            ionIcon="fa-book"
             title="Logbook"
             open="logbookView"
             close="homeView"
           />
           <MainButton
             id="directoryIcon"
-            ionIcon="people"
+            ionIcon="fa-user"
             title="Directory"
             open="directoryView"
             close="homeView"
           />
           <MainButton
             id="newNoteIcon"
-            ionIcon="add-outline"
+            ionIcon="fa-plus-circle"
             title="Add New Note"
             open="noteView"
             close="homeView"
           />
           <MainButton
             id="newPersonIcon"
-            ionIcon="person-add"
+            ionIcon="fa-user-plus"
             title="New Person"
             open="personView"
             close="homeView"
@@ -55,11 +55,7 @@ function App() {
         </div>
       </div>
       <div className="view off" id="logbookView">
-        <Header
-          id="logbookHeader"
-          title="Logbook"
-          icon="funnel-outline"
-        ></Header>
+        <Header id="logbookHeader" title="Logbook" icon="fa-filter"></Header>
         <div className="viewBody">
           <div id="logbook">
             <Log id="1" />
@@ -76,7 +72,11 @@ function App() {
         </div>
       </div>
       <div className="view off" id="directoryView">
-        <Header id="directoryHeader" title="Directory" icon="search"></Header>
+        <Header
+          id="directoryHeader"
+          title="Directory"
+          icon="fa-search"
+        ></Header>
         <div className="viewBody">
           <div id="directory">
             <EntryItem id="1" />

@@ -7,7 +7,7 @@ const Header = (props) => {
   if (props.icon) {
     extraIcon = (
       <div id={props.id + props.icon} className="extraIcon">
-        <ion-icon name={props.icon}></ion-icon>
+        <i className={"fas " + props.icon}></i>
       </div>
     );
   }

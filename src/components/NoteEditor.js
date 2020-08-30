@@ -21,7 +21,7 @@ const NoteEditor = (props) => {
             className="textInput"
             id={p.appendID(props.id, "notePersonText", "-")}
           >
-            <ion-icon name="person"></ion-icon>
+            <i className="fas fa-user"></i>
             <label htmlFor="personNameInput" className="off">
               Attach to Person
             </label>
@@ -51,7 +51,7 @@ const NoteEditor = (props) => {
             className="textInput"
             id={p.appendID(props.id, "noteTagText", "-")}
           >
-            <ion-icon name="pricetags-outline"></ion-icon>
+            <i className="fas fa-tags"></i>
             <input
               className="noteInput"
               type="text"
@@ -59,6 +59,10 @@ const NoteEditor = (props) => {
               placeholder="Tags"
               id={p.appendID(props.id, "tagInput", "-")}
             />
+            <div
+              className="tagList"
+              id={p.appendID(props.id, "tagList", "-")}
+            ></div>
             <div
               className="autocomplete"
               id={p.appendID(props.id, "catAutocomplete", "-")}
@@ -71,10 +75,10 @@ const NoteEditor = (props) => {
             className="textInput"
             id={p.appendID(props.id, "noteDateText", "-")}
           >
-            <ion-icon name="calendar"></ion-icon>
+            <i className="fas fa-calendar-alt"></i>
             <input
               className="noteInput"
-              type="text"
+              type="date"
               autoComplete="off"
               placeholder="Date"
               id={p.appendID(props.id, "noteDateInput", "-")}
@@ -102,14 +106,6 @@ const NoteEditor = (props) => {
               id={p.appendID(props.id, "customReminderCB", "-")}
             />
             <label htmlFor="customReminderCB">Custom reminder</label>
-          </div>
-          <div id={p.appendID(props.id, "interaction", "-")}>
-            <input
-              type="checkbox"
-              id={p.appendID(props.id, "interactionCB", "-")}
-              defaultChecked={true}
-            />
-            <label htmlFor="interactionCB">Log as interaction</label>
           </div>
           <div id={p.appendID(props.id, "addToBio", "-")}>
             <input
