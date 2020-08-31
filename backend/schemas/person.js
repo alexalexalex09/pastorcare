@@ -5,10 +5,13 @@ var Schema = mongoose.Schema;
 //Create schema
 var PersonSchema = new Schema(
   {
-    name: String,
+    firstName: String,
+    lastName: String,
+    formalName: String,
+    maidenName: String,
     birthday: Date,
     anniversary: Date,
-    occupations: [String],
+    occupations: [{ title: String, organization: String, start: Date }],
     relationships: [
       {
         person: { type: Schema.Types.ObjectId, ref: "Person" },
