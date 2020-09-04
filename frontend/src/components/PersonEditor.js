@@ -20,7 +20,10 @@ const PersonEditor = (props) => {
             id={p.appendID(props.id, "personText", "-")}
           >
             <i className="fas fa-user"></i>
-            <label htmlFor="personInput" className="off">
+            <label
+              htmlFor={p.appendID(props.id, "personInput", "-")}
+              className="off"
+            >
               Name
             </label>
             <input
@@ -36,7 +39,10 @@ const PersonEditor = (props) => {
             id={p.appendID(props.id, "noteTagText", "-")}
           >
             <i className="fas fa-gift"></i>
-            <label htmlFor="birthdayInput" className="off">
+            <label
+              htmlFor={p.appendID(props.id, "birthdayInput", "-")}
+              className="off"
+            >
               Birthday
             </label>
             <input
@@ -52,7 +58,10 @@ const PersonEditor = (props) => {
             id={p.appendID(props.id, "noteDateText", "-")}
           >
             <i className="fas fa-ring"></i>
-            <label htmlFor="anniversaryInput" className="off">
+            <label
+              htmlFor={p.appendID(props.id, "anniversaryInput", "-")}
+              className="off"
+            >
               Anniversary
             </label>
             <input
@@ -68,7 +77,10 @@ const PersonEditor = (props) => {
             id={p.appendID(props.id, "noteDateText", "-")}
           >
             <i className="fas fa-briefcase"></i>
-            <label htmlFor="occupationInput" className="off">
+            <label
+              htmlFor={p.appendID(props.id, "occupationInput", "-")}
+              className="off"
+            >
               Occupation
             </label>
             <input
@@ -88,7 +100,10 @@ const PersonEditor = (props) => {
             id={p.appendID(props.id, "noteDateText", "-")}
           >
             <i className="fas fa-project-diagram"></i>
-            <label htmlFor="relationshipsInput" className="off">
+            <label
+              htmlFor={p.appendID(props.id, "relationshipsInput", "-")}
+              className="off"
+            >
               Relationships
             </label>
             <input
@@ -108,7 +123,10 @@ const PersonEditor = (props) => {
             id={p.appendID(props.id, "noteDateText", "-")}
           >
             <i className="fas fa-users"></i>
-            <label htmlFor="groupsInput" className="off">
+            <label
+              htmlFor={p.appendID(props.id, "groupsInput", "-")}
+              className="off"
+            >
               Groups
             </label>
             <input

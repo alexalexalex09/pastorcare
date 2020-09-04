@@ -10,6 +10,7 @@ import Cloud from "./components/Cloud";
 import MainButton from "./components/MainButton";
 import Log from "./components/Log";
 import EntryItem from "./components/EntryItem";
+import Pop from "./components/Pop";
 
 //Helpers
 //import h from "./helpers/h";
@@ -46,10 +47,10 @@ function App() {
             close="homeView"
           />
           <MainButton
-            id="newPersonIcon"
-            ionIcon="fa-user-plus"
-            title="New Person"
-            open="personView"
+            id="newCheckinIcon"
+            ionIcon="fa-user-check"
+            title="Check In"
+            open="checkinPop"
             close="homeView"
           />
         </div>
@@ -98,6 +99,7 @@ function App() {
       <div className="view off" id="personView">
         <PersonEditor title="New Person"></PersonEditor>
       </div>
+      <Pop></Pop>
     </div>
   );
 }
