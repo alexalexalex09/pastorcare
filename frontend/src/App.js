@@ -11,6 +11,9 @@ import MainButton from "./components/MainButton";
 import Log from "./components/Log";
 import EntryItem from "./components/EntryItem";
 import Pop from "./components/Pop";
+import SubmitButton from "./components/SubmitButton";
+import Input from "./components/Input";
+import Title from "./components/Title";
 
 //Helpers
 //import h from "./helpers/h";
@@ -99,7 +102,29 @@ function App() {
       <div className="view off" id="personView">
         <PersonEditor title="New Person"></PersonEditor>
       </div>
-      <Pop></Pop>
+      <Pop>
+        <Title>Check In</Title>
+        <Input
+          icon="fa-user"
+          id="checkinPeople"
+          showLabel="false"
+          label="People"
+          className="checkinInput"
+          type="text"
+          default="Add People"
+        ></Input>
+        <Input
+          icon="fa-calendar"
+          id="checkinDate"
+          showLabel="false"
+          label="Date"
+          className="checkinInput"
+          type="date"
+          default=""
+        ></Input>
+        <input type="textarea" placeholder="Add notes here..."></input>
+        <SubmitButton>Submit</SubmitButton>
+      </Pop>
     </div>
   );
 }
