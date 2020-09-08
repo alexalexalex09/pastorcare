@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const Person = require("../schemas/person.js");
+const Person = require("../schemas/person");
+const b = require("../helpers/b");
 
 /*Mongo setup*/
 
@@ -19,6 +20,28 @@ mongoose.connect(mongoDB, {
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+let tests = [
+  {
+    test: [["First", "Second"], "test"],
+    fn: stringArrayToObject,
+    expect: [{ test: "First" }, { test: "Second" }],
+    err: "Error parsing String Arrays",
+  },
+  {
+    test: ["Name", {}, "firstName"],
+    fn: checkAndAdd,
+    expect: { firstName: "Name" },
+    err: "Error in checkAndAdd",
+  },
+  {
+    test: [[{ name: "Name" }], {}, "firstName"],
+    fn: checkAndAdd,
+    expect: { firstName: [{ name: "Name" }] },
+    err: "Error in checkAndAdd",
+  },
+];
+console.log(b.testAllFn(tests));
 
 /**
  *
@@ -67,6 +90,28 @@ function checkAndAddArray(item, curObj, field) {
   return curObj;
 }
 
+/**
+ *
+ *
+ * @param {Array} arr Array of strings to convert to objects
+ * @param {String} field Optional: Field to assign strings to, defaults to index
+ * @returns {Array} Array of objects
+ */
+function stringArrayToObject(arr, field) {
+  if (arr && Array.isArray(arr) && typeof arr[0] === "string") {
+    arr = arr.map((e, i) => {
+      var res = {};
+      if (field) {
+        res[field] = e;
+      } else {
+        res[i] = e;
+      }
+      return res;
+    });
+  }
+  return arr;
+}
+
 /* Get a person by name */
 router.post("/get", function (req, res) {
   Person.findOne({ name: req.body.name }).exec(function (err, curUser) {
@@ -87,9 +132,15 @@ router.post("/add", function (req, res) {
   person = checkAndAdd(req.body.maidenName, person, "maidenName");
   person = checkAndAdd(req.body.birthday, person, "birthday");
   person = checkAndAdd(req.body.anniversary, person, "anniversary");
-  person = checkAndAdd(req.body.occupations, person, "occupations");
-  person = checkAndAdd(req.body.relationships, person, "relationships");
-  person = checkAndAdd(req.body.groups, person, "groups");
+  const occupations = stringArrayToObject(req.body.occupations, "title");
+  const relationships = stringArrayToObject(
+    req.body.relationships,
+    "relationship"
+  );
+  const groups = stringArrayToObject(req.body.groups, "name");
+  person = checkAndAdd(occupations, person, "occupations");
+  person = checkAndAdd(relationships, person, "relationships");
+  person = checkAndAdd(groups, person, "groups");
   console.log("person:", person);
   Person.findOneAndUpdate({ name: req.body.name }, person).exec(function (
     err,

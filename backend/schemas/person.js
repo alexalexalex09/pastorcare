@@ -18,7 +18,7 @@ var PersonSchema = new Schema(
         relationship: String,
       },
     ],
-    groups: [{ type: Schema.Types.ObjectId, ref: "Person" }],
+    groups: [{ name: String }],
   },
   { collection: "people" }
 );

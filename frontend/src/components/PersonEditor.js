@@ -1,8 +1,90 @@
 import React from "react";
+import api from "./api";
 import Header from "./Header";
+import Input from "./Input";
 import p from "../helpers/p";
+import h from "../helpers/h";
 
 const PersonEditor = (props) => {
+  //Tests
+  let test = h.testFn({
+    test: ["AB", "cd", "EFG", "hijk"],
+    fn: parseName,
+    expect: { firstName: "AB", middleName: "cd", lastName: "EFG hijk" },
+    err: "Error parsing name",
+    success: "Name parsing works",
+  });
+  if (!test.res) {
+    throw test.err;
+  } else {
+    //console.log(test.success);
+  }
+  //End Tests
+
+  function addPerson() {
+    const name = h.findID("personText").value.split(" ");
+
+    const { firstName, middleName, lastName } = parseName(name);
+    const birthday = h.findID("birthdayInput").value;
+    const anniversary = h.findID("anniversaryInput").value;
+    const occupations = p.getChildrenAsArray(
+      h.sibling("#occupationInput", ".list").children
+    );
+    const relationships = p.getChildrenAsArray(
+      h.sibling("#relationshipsInput", ".list").children
+    );
+    const groups = p.getChildrenAsArray(
+      h.sibling("#groupsInput", ".list").children
+    );
+    let person = {
+      firstName: firstName,
+      middleName: middleName,
+      lastName: lastName,
+      birthday: birthday,
+      anniversary: anniversary,
+      occupations: occupations,
+      relationships: relationships,
+      groups: groups,
+    };
+    console.log(person);
+    api
+      .addPerson(person)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  /**
+   *
+   *
+   * @param {Array} nameArray
+   */
+  function parseName(nameArray) {
+    if (!Array.isArray(nameArray)) return { err: "Not an array" };
+    if (nameArray.length < 1) return { err: "Array length less than 1" };
+    let firstName, middleName, lastName;
+    switch (nameArray.length) {
+      case 3:
+        [firstName, middleName, lastName] = nameArray;
+        break;
+      case 2:
+        [firstName, lastName] = nameArray;
+        break;
+      case 1:
+        [firstName] = nameArray;
+        break;
+      default:
+        firstName = nameArray[0];
+        middleName = nameArray[1];
+        lastName = nameArray.slice(2).join(" ");
+        break;
+    }
+    return { firstName: firstName, middleName: middleName, lastName: lastName };
+  }
+
   return (
     <div className={p.appendID(props.className, "personEditor ", " ")}>
       <Header
@@ -15,171 +97,69 @@ const PersonEditor = (props) => {
           className="textGroup"
           id={p.appendID(props.id, "personTextGroup", "-")}
         >
-          <div
-            className="textInput"
+          <Input
+            icon="fa-user"
             id={p.appendID(props.id, "personText", "-")}
-          >
-            <i className="fas fa-user"></i>
-            <label
-              htmlFor={p.appendID(props.id, "personInput", "-")}
-              className="off"
-            >
-              Name
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              placeholder="Name"
-              id={p.appendID(props.id, "personInput", "-")}
-            />
-          </div>
-          <div
-            className="textInput"
-            id={p.appendID(props.id, "noteTagText", "-")}
-          >
-            <i className="fas fa-gift"></i>
-            <label
-              htmlFor={p.appendID(props.id, "birthdayInput", "-")}
-              className="off"
-            >
-              Birthday
-            </label>
-            <input
-              className="noteInput"
-              type="date"
-              autoComplete="off"
-              placeholder="Birthday"
-              id={p.appendID(props.id, "birthdayInput", "-")}
-            />
-          </div>
-          <div
-            className="textInput"
-            id={p.appendID(props.id, "noteDateText", "-")}
-          >
-            <i className="fas fa-ring"></i>
-            <label
-              htmlFor={p.appendID(props.id, "anniversaryInput", "-")}
-              className="off"
-            >
-              Anniversary
-            </label>
-            <input
-              className="noteInput"
-              type="date"
-              autoComplete="off"
-              placeholder="Anniversary"
-              id={p.appendID(props.id, "anniversaryInput", "-")}
-            />
-          </div>
-          <div
-            className="textInput"
-            id={p.appendID(props.id, "noteDateText", "-")}
-          >
-            <i className="fas fa-briefcase"></i>
-            <label
-              htmlFor={p.appendID(props.id, "occupationInput", "-")}
-              className="off"
-            >
-              Occupation
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              placeholder="Occupation"
-              id={p.appendID(props.id, "occupationInput", "-")}
-            />
-            <div
-              className="tagList"
-              id={p.appendID(props.id, "occupationList", "-")}
-            ></div>
-          </div>
-          <div
-            className="textInput"
-            id={p.appendID(props.id, "noteDateText", "-")}
-          >
-            <i className="fas fa-project-diagram"></i>
-            <label
-              htmlFor={p.appendID(props.id, "relationshipsInput", "-")}
-              className="off"
-            >
-              Relationships
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              placeholder="Relationships"
-              id={p.appendID(props.id, "relationshipsInput", "-")}
-            />
-            <div
-              className="tagList"
-              id={p.appendID(props.id, "relationshipsList", "-")}
-            ></div>
-          </div>
-          <div
-            className="textInput"
-            id={p.appendID(props.id, "noteDateText", "-")}
-          >
-            <i className="fas fa-users"></i>
-            <label
-              htmlFor={p.appendID(props.id, "groupsInput", "-")}
-              className="off"
-            >
-              Groups
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              placeholder="Groups"
-              id={p.appendID(props.id, "groupsInput", "-")}
-            />
-            <div
-              className="tagList"
-              id={p.appendID(props.id, "groupsList", "-")}
-            ></div>
-          </div>
+            text="Name"
+            default="Name"
+            type="text"
+            hideLabel="true"
+            autoComplete="true"
+            list="false"
+          ></Input>
+          <Input
+            icon="fa-gift"
+            id={p.appendID(props.id, "birthdayInput", "-")}
+            text="Birthday"
+            default="Birthday"
+            type="date"
+            hideLabel="true"
+            autoComplete="false"
+            list="false"
+          ></Input>
+          <Input
+            icon="fa-ring"
+            id={p.appendID(props.id, "anniversaryInput", "-")}
+            text="Anniversary"
+            default="Anniversary"
+            type="date"
+            hideLabel="true"
+            autoComplete="false"
+            list="false"
+          ></Input>
+          <Input
+            icon="fa-briefcase"
+            id={p.appendID(props.id, "occupationInput", "-")}
+            text="Occupation"
+            default="Occupation"
+            type="text"
+            hideLabel="true"
+            autoComplete="false"
+            list="true"
+          ></Input>
+          <Input
+            icon="fa-project-diagram"
+            id={p.appendID(props.id, "relationshipsInput", "-")}
+            text="Relationships"
+            default="Relationships"
+            type="text"
+            hideLabel="true"
+            autoComplete="false"
+            list="true"
+          ></Input>
+          <Input
+            icon="fa-users"
+            id={p.appendID(props.id, "groupsInput", "-")}
+            text="Groups"
+            default="Groups"
+            type="text"
+            hideLabel="true"
+            autoComplete="false"
+            list="true"
+          ></Input>
         </div>
-        <div
-          id={p.appendID(props.id, "personNotes", "-")}
-          className="personNotes"
-        >
-          <div className="personNoteHeader">
-            <i className="fas fa-plus-circle"></i>
-            <div className="personNoteTitle">Notes</div>
-          </div>
-          <div className="personNotePreviews">
-            <div className="personNotePreview">
-              Here is where a brief preview of each note will appear, giving you
-              an idea of what the note is about
-            </div>
-            <div className="personNotePreview">
-              Here is where a brief preview of each note will appear, giving you
-              an idea of what the note is about
-            </div>
-            <div className="personNotePreview">
-              Here is where a brief preview of each note will appear, giving you
-              an idea of what the note is about
-            </div>
-            <div className="personNotePreview">
-              Here is where a brief preview of each note will appear, giving you
-              an idea of what the note is about
-            </div>
-            <div className="personNotePreview">
-              Here is where a brief preview of each note will appear, giving you
-              an idea of what the note is about
-            </div>
-            <div className="personNotePreview">
-              Here is where a brief preview of each note will appear, giving you
-              an idea of what the note is about
-            </div>
-            <div className="personNotePreview">
-              Here is where a brief preview of each note will appear, giving you
-              an idea of what the note is about
-            </div>
-          </div>
+        <div className="saveButton" onClick={addPerson}>
+          <button>Save</button>
         </div>
       </div>
     </div>

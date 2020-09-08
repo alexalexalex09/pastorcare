@@ -275,28 +275,28 @@ div#cloudB {
   box-sizing: border-box;
 }
 
-.textInput {
+.inputField {
   margin-bottom: 5px;
   width: 100%;
   display: grid;
   grid-template-columns: 1.5em 1fr;
 }
 
-.textInput .fas {
+.inputField .fas {
   align-self: center;
   justify-self: center;
 }
 
-.editorSaveButton {
+.saveButton {
   width: 100%;
-  position: absolute;
-  bottom: 0px;
   text-align: center;
+  margin-top: 15px;
 }
 
-.editorSaveButton button {
+.saveButton button {
   width: 40vw;
   height: 2em;
+  cursor: pointer;
 }
 
 .customEditorMenu button {
@@ -305,12 +305,34 @@ div#cloudB {
   margin-right: 5px;
 }
 
+.list {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding: 8px 10px 0px;
+  height: auto;
+}
+
+.list span {
+  border-radius: 15px;
+  background-color: var(--secondary);
+  padding: 0px 6px;
+  margin-right: 5px;
+  line-height: calc(1.1em + 5px);
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.list span i {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
 /********************************/
 /*         Person View          */
 /********************************/
 
-.personEditor .textInput {
-  margin-bottom: 2.5vh;
+.personEditor .inputField {
+  margin-bottom: 0px;
 }
 
 .personNotes {

@@ -1,90 +1,59 @@
 import React from "react";
 import Header from "./Header";
 import CustomEditor from "./CustomEditor";
+import Input from "./Input";
+import CheckedField from "./CheckedField";
 import p from "../helpers/p";
 
 const NoteEditor = (props) => {
   return (
-    <div className={p.appendID(props.className, "noteEditor", " ")}>
-      <Header
-        id={p.appendID(props.id, "noteHeader", "-")}
-        title={props.title}
-        icon="save-outline"
-      ></Header>
+    <div
+      className={p.appendID(props.className, "noteEditor", " ")}
+      id={props.id}
+    >
+      <Header title={props.title} icon="save-outline"></Header>
       <div className="viewBody">
         <CustomEditor></CustomEditor>
-        <div
-          className="textGroup"
-          id={p.appendID(props.id, "noteTextGroup", "-")}
-        >
-          <div
-            className="textInput"
-            id={p.appendID(props.id, "notePersonText", "-")}
-          >
-            <i className="fas fa-user"></i>
-            <label htmlFor="personNameInput" className="off">
-              Attach to Person
-            </label>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              placeholder="Attach to Person"
-              id={p.appendID(props.id, "personNameInput", "-")}
-            />
-            <div
-              className="autocomplete"
-              id={
-                props.id
-                  ? "personAutocomplete-" + props.id
-                  : "personAutocomplete"
-              }
-            ></div>
-          </div>
-          <label
-            htmlFor={p.appendID(props.id, "tagInput", "-")}
-            className="off"
-          >
-            Tags
-          </label>
-          <div
-            className="textInput"
+        <div className="textGroup">
+          <Input
+            icon="fa-user"
+            id={p.appendID(props.id, "personNameInput", "-")}
+            text="Attach to Person"
+            type="text"
+            hideLabel="true"
+            autoComplete="true"
+            list="true"
+          ></Input>
+          <div id="personList"></div>
+          <Input
+            icon="fa-tags"
             id={p.appendID(props.id, "noteTagText", "-")}
-          >
-            <i className="fas fa-tags"></i>
-            <input
-              className="noteInput"
-              type="text"
-              autoComplete="off"
-              placeholder="Tags"
-              id={p.appendID(props.id, "tagInput", "-")}
-            />
-            <div
-              className="tagList"
-              id={p.appendID(props.id, "tagList", "-")}
-            ></div>
-            <div
-              className="autocomplete"
-              id={p.appendID(props.id, "catAutocomplete", "-")}
-            ></div>
-          </div>
-          <label htmlFor="noteDateInput" className="off">
-            Date
-          </label>
-          <div
-            className="textInput"
-            id={p.appendID(props.id, "noteDateText", "-")}
-          >
-            <i className="fas fa-calendar-alt"></i>
-            <input
-              className="noteInput"
-              type="date"
-              autoComplete="off"
-              placeholder="Date"
-              id={p.appendID(props.id, "noteDateInput", "-")}
-            />
-          </div>
+            text="Tags"
+            type="text"
+            hideLabel="true"
+            autoComplete="true"
+            list="true"
+          ></Input>
+          <div id="tagList"></div>
+          <Input
+            icon="fa-calendar-alt"
+            id={p.appendID(props.id, "noteDateInput", "-")}
+            text="Date"
+            type="date"
+            hideLabel="true"
+            autoComplete="false"
+          ></Input>
         </div>
+        <CheckedField title="Check in?" childID="checkinDate">
+          <Input
+            icon="fa-calendar-alt"
+            id={p.appendID(props.id, "checkinDateInput", "-")}
+            text="Date"
+            type="date"
+            hideLabel="true"
+            autoComplete="false"
+          ></Input>
+        </CheckedField>
         <div id={p.appendID(props.id, "noteCheckGroup", "-")}>
           <div id={p.appendID(props.id, "emailSelf", "-")}>
             <input
@@ -100,13 +69,20 @@ const NoteEditor = (props) => {
             />
             <label htmlFor="nextDayCB">Next day reminder</label>
           </div>
-          <div id={p.appendID(props.id, "customReminder", "-")}>
-            <input
-              type="checkbox"
-              id={p.appendID(props.id, "customReminderCB", "-")}
-            />
-            <label htmlFor="customReminderCB">Custom reminder</label>
-          </div>
+          <CheckedField
+            title="Custom Reminder"
+            childID={p.appendID(props.id, "customReminder", "-")}
+          >
+            <Input
+              icon="fa-calendar-alt"
+              id={p.appendID(props.id, "customReminderInput", "-")}
+              text="Date"
+              type="datetime-local"
+              hideLabel="true"
+              autoComplete="false"
+            ></Input>
+          </CheckedField>
+
           <div id={p.appendID(props.id, "addToBio", "-")}>
             <input
               type="checkbox"
@@ -115,7 +91,7 @@ const NoteEditor = (props) => {
             <label htmlFor="addToBioCB">Add to bio</label>
           </div>
         </div>
-        <div className="editorSaveButton">
+        <div className="saveButton">
           <button>Save</button>
         </div>
       </div>

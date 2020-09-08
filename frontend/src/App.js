@@ -10,10 +10,6 @@ import Cloud from "./components/Cloud";
 import MainButton from "./components/MainButton";
 import Log from "./components/Log";
 import EntryItem from "./components/EntryItem";
-import Pop from "./components/Pop";
-import SubmitButton from "./components/SubmitButton";
-import Input from "./components/Input";
-import Title from "./components/Title";
 
 //Helpers
 //import h from "./helpers/h";
@@ -43,17 +39,17 @@ function App() {
             close="homeView"
           />
           <MainButton
+            id="newCheckinIcon"
+            ionIcon="fa-user-plus"
+            title="Add New Person"
+            open="personView"
+            close="homeView"
+          />
+          <MainButton
             id="newNoteIcon"
             ionIcon="fa-plus-circle"
             title="Add New Note"
             open="noteView"
-            close="homeView"
-          />
-          <MainButton
-            id="newCheckinIcon"
-            ionIcon="fa-user-check"
-            title="Check In"
-            open="checkinPop"
             close="homeView"
           />
         </div>
@@ -97,34 +93,11 @@ function App() {
         </div>
       </div>
       <div className="view off" id="noteView">
-        <NoteEditor title="New Note" id="newNote"></NoteEditor>
+        <NoteEditor title="Edit Note" id="newNote"></NoteEditor>
       </div>
       <div className="view off" id="personView">
-        <PersonEditor title="New Person"></PersonEditor>
+        <PersonEditor title="Edit Person"></PersonEditor>
       </div>
-      <Pop>
-        <Title>Check In</Title>
-        <Input
-          icon="fa-user"
-          id="checkinPeople"
-          showLabel="false"
-          label="People"
-          className="checkinInput"
-          type="text"
-          default="Add People"
-        ></Input>
-        <Input
-          icon="fa-calendar"
-          id="checkinDate"
-          showLabel="false"
-          label="Date"
-          className="checkinInput"
-          type="date"
-          default=""
-        ></Input>
-        <input type="textarea" placeholder="Add notes here..."></input>
-        <SubmitButton>Submit</SubmitButton>
-      </Pop>
     </div>
   );
 }
