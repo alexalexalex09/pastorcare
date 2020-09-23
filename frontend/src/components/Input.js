@@ -41,7 +41,7 @@ const Input = (props) => {
 
   //Need to customize setListItems so that it can see if a space has been added and customize what gets added
   return (
-    <div className="inputField">
+    <div className="inputField" id={props.id + "-field"}>
       <i className={"fas " + props.icon}></i>
       <label htmlFor={props.id} className={props.hideLabel && "off"}>
         {props.label}

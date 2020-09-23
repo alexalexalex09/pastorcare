@@ -9,4 +9,13 @@ export default {
       },
       data: person,
     }),
+  addNote: (note) =>
+    axios({
+      method: "POST",
+      url: "/notes/add",
+      headers: {
+        "content-type": "application/json",
+      },
+      data: note,
+    }),
 };

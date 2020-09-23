@@ -47,7 +47,7 @@ const Editor = () => {
   );
 };
 
-const CustomEditor = () => {
+const CustomEditor = (props) => {
   const manager = useManager([
     new BoldExtension(),
     new ItalicExtension(),
@@ -56,7 +56,7 @@ const CustomEditor = () => {
   ]);
 
   return (
-    <RemirrorProvider manager={manager}>
+    <RemirrorProvider manager={manager} onChange={props.onChangeHandler}>
       <Editor />
     </RemirrorProvider>
   );

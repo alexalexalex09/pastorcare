@@ -381,3 +381,31 @@ div#cloudB {
   box-sizing: border-box;
   padding: 3px;
 }
+
+.multiInputSave {
+  width: min(200px, 50vw);
+  border: 1px solid var(--white);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 8px auto 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.multiInputItems {
+  margin-bottom: 10px;
+}
+
+/********************************/
+/*        Directory View        */
+/********************************/
+
+#directory .personEditor {
+  background-color: var(--background);
+  width: 90%;
+  height: max(100%, 100vw);
+  position: fixed;
+  top: 0;
+  left: 5%;
+  z-index: 101;
+}

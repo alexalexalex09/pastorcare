@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const Note = require("../schemas/note.js");
+const b = require("../helpers/b");
 
 /*Mongo setup*/
 
@@ -20,7 +21,8 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-/* Get a note by title */
+/* Get a note by title  */
+/* /notes/title         */
 router.post("/title", function (req, res) {
   Note.findOne({ title: req.body.title }).exec(function (err, curUser) {
     if (err) {
@@ -29,6 +31,31 @@ router.post("/title", function (req, res) {
       res.send({ result: curUser });
     }
   });
+});
+
+/*
+/* Add a new note */
+/* /notes/add     */
+/* TODO: Check before adding if it already exists, and warn if it does */
+router.post("/add", function (req, res) {
+  let note = {};
+  note = b.checkAndAdd(req.body.title, note, "title");
+  note = b.checkAndAdd(req.body.content, note, "content");
+  note = b.checkAndAdd(req.body.tags, note, "tags");
+  note = b.checkAndAdd(req.body.date, note, "date");
+  note = b.checkAndAdd(req.body.people, note, "people");
+  console.log("Note: ", note);
+
+  new Note(note).save().then(
+    function (curNote) {
+      console.log("Note: ", curNote);
+      res.send({ note: curNote });
+    },
+    function (err) {
+      console.log("Error: ", err);
+      res.send({ err: err });
+    }
+  );
 });
 
 module.exports = router;

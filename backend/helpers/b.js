@@ -76,6 +76,73 @@ const b = {
     }
     return "Passed " + pass + " of " + tests.length + " tests";
   },
+  /**
+   *
+   *
+   * @param {*} item add this to array if exists
+   * @param {object} curObj the object to which <item> should be added
+   * @param {string} key the property under which <item> should be added
+   * @returns modified object with or without new key
+   */
+  checkAndAdd: function (item, curObj, field) {
+    //console.log(field, " item: ", item);
+    if (item) {
+      if (Array.isArray(item)) {
+        curObj = this.checkAndAddArray(item, curObj, field);
+      } else {
+        curObj[field] = item;
+      }
+      //console.log(field, " update: ", curObj[field]);
+    }
+    //console.log("returning: ", curObj);
+    return curObj;
+  },
+  /**
+   *
+   *
+   * @param {*} item add this to array if exists
+   * @param {object} curObj the object to which <item> should be added
+   * @param {string} field the property under which <item> should be added
+   * @returns modified object with or without new key
+   */
+  checkAndAddArray: function (item, curObj, field) {
+    if (item) {
+      if (!curObj[field]) {
+        curObj[field] = [];
+      }
+      for (let key in item) {
+        if (item.hasOwnProperty(key)) {
+          curObj[field].push(item[key]);
+        }
+      }
+    }
+    return curObj;
+  },
+  /**
+   *
+   *
+   * @param {Array} arr Array of strings to convert to objects
+   * @param {String} field Optional: Field to assign strings to, defaults to index
+   * @returns {Array} Array of objects
+   */
+  stringArrayToObject: function (arr, field) {
+    if (arr && Array.isArray(arr) && typeof arr[0] === "string") {
+      arr = arr.map((e, i) => {
+        var res = {};
+        if (field) {
+          // if the user provided a field, map an object with the designated field name
+          res[field] = e;
+        } else {
+          //otherwise, map an object with the original index of the element. This is for
+          //situations where the name of the field doesn't matter. The result is that the
+          //result for an array [el0, el1, el2] will be [{0: el0}, {1: el1}, {2: el2}]
+          res[i] = e;
+        }
+        return res;
+      });
+    }
+    return arr;
+  },
   equals: equals,
 };
 

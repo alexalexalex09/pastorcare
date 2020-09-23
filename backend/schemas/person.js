@@ -14,7 +14,7 @@ var PersonSchema = new Schema(
     occupations: [{ title: String, organization: String, start: Date }],
     relationships: [
       {
-        person: { type: Schema.Types.ObjectId, ref: "Person" },
+        person: String,
         relationship: String,
       },
     ],

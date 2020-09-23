@@ -1,11 +1,86 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import CustomEditor from "./CustomEditor";
 import Input from "./Input";
 import CheckedField from "./CheckedField";
 import p from "../helpers/p";
+import h from "../helpers/h";
+import api from "./api";
 
 const NoteEditor = (props) => {
+  if (
+    h.testFn({
+      test: {
+        state: {
+          doc: {
+            content: {
+              content: [{ content: { content: [{ text: "hi" }] } }],
+            },
+          },
+        },
+      },
+      fn: processRemirror,
+      expect: `hi\r\n`,
+    }).res
+  ) {
+    console.log("Note parsing works");
+  } else {
+    throw new Error("Error parsing note");
+  }
+  const [text, setText] = useState();
+
+  function addNote(e) {
+    const el = e.target.parentElement.parentElement;
+    const tags = Array.from(
+      el.querySelectorAll("#noteTagText-newNote-field .list span")
+    ).map((e) => e.innerText);
+    const date = el.querySelectorAll("#noteDateInput-newNote-field input")[0]
+      .value;
+    const people = Array.from(
+      el.querySelectorAll("#personNameInput-newNote-field .list span")
+    ).map((e) => e.innerText);
+    const note = {
+      title: "",
+      content: text,
+      tags: tags,
+      date: date,
+      people: people,
+    };
+    api
+      .addNote(note)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function onChangeHandler(e) {
+    //console.log(e);
+    setText(processRemirror(e));
+  }
+
+  /**
+   *
+   *
+   * @param {Remirror Element} content takes (this) and returns a
+   * @returns {String} string with paragraphs separated by \r\n
+   */
+  function processRemirror(e) {
+    let res = "";
+    const content = e.state.doc.content.content;
+    content.forEach((e) => {
+      if (e.content.content[0]) {
+        res += e.content.content[0].text + "\r\n";
+      } else {
+        return "";
+      }
+    });
+
+    return res;
+  }
+
   return (
     <div
       className={p.appendID(props.className, "noteEditor", " ")}
@@ -13,7 +88,7 @@ const NoteEditor = (props) => {
     >
       <Header title={props.title} icon="save-outline"></Header>
       <div className="viewBody">
-        <CustomEditor></CustomEditor>
+        <CustomEditor onChangeHandler={onChangeHandler}></CustomEditor>
         <div className="textGroup">
           <Input
             icon="fa-user"
@@ -91,7 +166,7 @@ const NoteEditor = (props) => {
             <label htmlFor="addToBioCB">Add to bio</label>
           </div>
         </div>
-        <div className="saveButton">
+        <div className="saveButton" onClick={addNote}>
           <button>Save</button>
         </div>
       </div>

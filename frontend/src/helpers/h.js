@@ -48,7 +48,7 @@ const equals = function (x, y) {
 
 const h = {
   findOne: function (query) {
-    return document.querySelector(query);
+    return document.querySelectorAll(query);
   },
   findID: function (id) {
     return document.getElementById(id);
@@ -60,9 +60,13 @@ const h = {
     return document.getElementById(id).parentElement;
   },
   sibling: function (find, withSibling) {
-    return document
-      .querySelector(find)
-      .parentElement.querySelector(withSibling);
+    try {
+      return document
+        .querySelectorAll(find)
+        .parentElement.querySelectorAll(withSibling);
+    } catch {
+      return document.querySelectorAll(find);
+    }
   },
   notClass: function (htmlCollection, theClass) {
     //given an HTMLCollection, return an array of elements that don't have the given class
@@ -107,10 +111,13 @@ const h = {
    * @returns
    */
   testFn: function (par) {
+    const resultContent = par.fn(par.test);
     return {
-      res: h.equals(par.fn(par.test), par.expect),
-      err: (par.err, ": ", par.fn(par.test)) || "Error",
+      res: h.equals(resultContent, par.expect),
+      err: (par.err, ": ", resultContent) || "Error",
       success: par.success || undefined,
+      resultContent: resultContent,
+      expect: par.expect,
     };
   },
   equals: equals,

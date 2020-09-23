@@ -2,41 +2,52 @@ import React from "react";
 import api from "./api";
 import Header from "./Header";
 import Input from "./Input";
+import MultiInput from "./MultiInput.js";
 import p from "../helpers/p";
 import h from "../helpers/h";
 
 const PersonEditor = (props) => {
   //Tests
-  let test = h.testFn({
-    test: ["AB", "cd", "EFG", "hijk"],
-    fn: parseName,
-    expect: { firstName: "AB", middleName: "cd", lastName: "EFG hijk" },
-    err: "Error parsing name",
-    success: "Name parsing works",
-  });
-  if (!test.res) {
-    throw test.err;
+  if (
+    h.testFn({
+      test: ["AB", "cd", "EFG", "hijk"],
+      fn: parseName,
+      expect: { firstName: "AB", middleName: "cd", lastName: "EFG hijk" },
+    }).res
+  ) {
+    console.log("Name parsing works");
   } else {
-    //console.log(test.success);
+    throw new Error("Error parsing name");
   }
   //End Tests
 
   function addPerson() {
     const name = h.findID("personText").value.split(" ");
-
     const { firstName, middleName, lastName } = parseName(name);
     const birthday = h.findID("birthdayInput").value;
     const anniversary = h.findID("anniversaryInput").value;
+    console.log("Children: ", h.sibling("#occupationInput", ".list").children);
     const occupations = p.getChildrenAsArray(
       h.sibling("#occupationInput", ".list").children
     );
-    const relationships = p.getChildrenAsArray(
+    //const relationships = [];
+    /*const relationships = p.getChildrenAsArray(
       h.sibling("#relationshipsInput", ".list").children
-    );
+    );*/
+    let arr = [];
+    document
+      .querySelectorAll("#personView .multiInputItems")
+      .forEach(function (e) {
+        arr.push({
+          person: e.children[0].getElementsByTagName("input")[0].value,
+          relationship: e.children[1].getElementsByTagName("input")[0].value,
+        });
+      });
+    const relationships = arr;
     const groups = p.getChildrenAsArray(
       h.sibling("#groupsInput", ".list").children
     );
-    let person = {
+    const person = {
       firstName: firstName,
       middleName: middleName,
       lastName: lastName,
@@ -137,16 +148,26 @@ const PersonEditor = (props) => {
             autoComplete="false"
             list="true"
           ></Input>
-          <Input
-            icon="fa-project-diagram"
-            id={p.appendID(props.id, "relationshipsInput", "-")}
-            text="Relationships"
-            default="Relationships"
-            type="text"
-            hideLabel="true"
-            autoComplete="false"
-            list="true"
-          ></Input>
+          <MultiInput title="Relationships" list="true" id="relationshipInput">
+            <Input
+              icon="fa-user"
+              id={p.appendID(props.id, "relationshipsPersonInput", "-")}
+              text="Person"
+              default="Person"
+              type="text"
+              hideLabel="true"
+              autoComplete="false"
+            ></Input>
+            <Input
+              icon="fa-project-diagram"
+              id={p.appendID(props.id, "relationshipsRelInput", "-")}
+              text="Relationship"
+              default="Relationship"
+              type="text"
+              hideLabel="true"
+              autoComplete="false"
+            ></Input>
+          </MultiInput>
           <Input
             icon="fa-users"
             id={p.appendID(props.id, "groupsInput", "-")}

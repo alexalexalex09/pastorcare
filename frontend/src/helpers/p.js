@@ -14,7 +14,11 @@ const p = {
     }
   },
   getChildrenAsArray: function (children) {
-    return Array.from(children).map((e) => e.innerText.toString());
+    if (typeof children !== "undefined" && children.length > 0) {
+      return Array.from(children).map((e) => e.innerText.toString());
+    } else {
+      return [];
+    }
   },
 };
 

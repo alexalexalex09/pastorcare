@@ -9,7 +9,7 @@ var NoteSchema = new Schema(
     content: String,
     tags: [String],
     date: Date,
-    people: [{ type: Schema.Types.ObjectId, ref: "Person" }],
+    people: [String],
   },
   { collection: "notes" }
 );
