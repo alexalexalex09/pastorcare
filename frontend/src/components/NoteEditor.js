@@ -7,7 +7,28 @@ import p from "../helpers/p";
 import h from "../helpers/h";
 import api from "./api";
 
+/**
+ *
+ *
+ * @param {Remirror Element} content takes (this) and returns a
+ * @returns {String} string with paragraphs separated by \r\n
+ */
+function processRemirror(e) {
+  let res = "";
+  const content = e.state.doc.content.content;
+  content.forEach((e) => {
+    if (e.content.content[0]) {
+      res += e.content.content[0].text + "\r\n";
+    } else {
+      return "";
+    }
+  });
+
+  return res;
+}
+
 const NoteEditor = (props) => {
+  const [text, setText] = useState();
   if (
     h.testFn({
       test: {
@@ -23,11 +44,10 @@ const NoteEditor = (props) => {
       expect: `hi\r\n`,
     }).res
   ) {
-    console.log("Note parsing works");
+    //console.log("Note parsing works");
   } else {
     throw new Error("Error parsing note");
   }
-  const [text, setText] = useState();
 
   function addNote(e) {
     const el = e.target.parentElement.parentElement;
@@ -59,26 +79,6 @@ const NoteEditor = (props) => {
   function onChangeHandler(e) {
     //console.log(e);
     setText(processRemirror(e));
-  }
-
-  /**
-   *
-   *
-   * @param {Remirror Element} content takes (this) and returns a
-   * @returns {String} string with paragraphs separated by \r\n
-   */
-  function processRemirror(e) {
-    let res = "";
-    const content = e.state.doc.content.content;
-    content.forEach((e) => {
-      if (e.content.content[0]) {
-        res += e.content.content[0].text + "\r\n";
-      } else {
-        return "";
-      }
-    });
-
-    return res;
   }
 
   return (

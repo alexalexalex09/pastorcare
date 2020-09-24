@@ -18,4 +18,13 @@ export default {
       },
       data: note,
     }),
+  getNotes: (user) =>
+    axios({
+      method: "POST",
+      url: "/notes/add",
+      headers: {
+        "content-type": "application/json",
+      },
+      data: user,
+    }),
 };

@@ -15,7 +15,7 @@ const PersonEditor = (props) => {
       expect: { firstName: "AB", middleName: "cd", lastName: "EFG hijk" },
     }).res
   ) {
-    console.log("Name parsing works");
+    //bhncvconsole.log("Name parsing works");
   } else {
     throw new Error("Error parsing name");
   }
