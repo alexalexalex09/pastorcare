@@ -5,9 +5,13 @@ function LoginButton() {
   const { isAuthenticated, loginWithPopup } = useAuth0();
 
   if (!isAuthenticated) {
-    return <button onClick={loginWithPopup}>Log in</button>;
+    return (
+      <div className="loginButton">
+        <button onClick={loginWithPopup}>Log in</button>
+      </div>
+    );
   } else {
-    return;
+    return null;
   }
 }
 

@@ -6,7 +6,11 @@ const Header = (props) => {
   let extraIcon = <div className="extraIcon"></div>;
   if (props.icon) {
     extraIcon = (
-      <div id={props.id + props.icon} className="extraIcon">
+      <div
+        id={props.id + props.icon}
+        className="extraIcon"
+        onClick={props.onClick}
+      >
         <i className={"fas " + props.icon}></i>
       </div>
     );
