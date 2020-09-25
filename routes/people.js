@@ -68,6 +68,8 @@ router.post("/add", function (req, res) {
   person = b.checkAndAdd(req.body.maidenName, person, "maidenName");
   person = b.checkAndAdd(req.body.birthday, person, "birthday");
   person = b.checkAndAdd(req.body.anniversary, person, "anniversary");
+  person = b.checkAndAdd(req.body.phone, person, "phone");
+  person = b.checkAndAdd(req.body.address, person, "address");
   const occupations = b.stringArrayToObject(req.body.occupations, "title");
   const relationships = b.stringArrayToObject(
     req.body.relationships,
@@ -77,6 +79,7 @@ router.post("/add", function (req, res) {
   person = b.checkAndAdd(occupations, person, "occupations");
   person = b.checkAndAdd(relationships, person, "relationships");
   person = b.checkAndAdd(groups, person, "groups");
+  note = b.checkAndAdd(req.body.owner, person, "owner");
   console.log("person:", person);
   new Person(person).save().then(
     function (curUser) {
@@ -88,6 +91,13 @@ router.post("/add", function (req, res) {
       res.send({ err: err });
     }
   );
+});
+
+router.post("/all", function (req, res) {
+  Person.find({ owner: req.body.owner }).exec(function (err, curUsers) {
+    console.log(req.body.owner);
+    res.send(curUsers);
+  });
 });
 
 module.exports = router;

@@ -10,6 +10,7 @@ var NoteSchema = new Schema(
     tags: [String],
     date: Date,
     people: [String],
+    owner: String,
   },
   { collection: "notes" }
 );

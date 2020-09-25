@@ -6,6 +6,7 @@ import CheckedField from "./CheckedField";
 import p from "../helpers/p";
 import h from "../helpers/h";
 import api from "./api";
+import { useAuth0 } from "@auth0/auth0-react";
 
 /**
  *
@@ -65,6 +66,7 @@ const NoteEditor = (props) => {
       tags: tags,
       date: date,
       people: people,
+      owner: document.getElementById("auth0_sub").innerText,
     };
     api
       .addNote(note)
@@ -81,6 +83,7 @@ const NoteEditor = (props) => {
     setText(processRemirror(e));
   }
 
+  const { user } = useAuth0();
   return (
     <div
       className={p.appendID(props.className, "noteEditor", " ")}
@@ -89,6 +92,7 @@ const NoteEditor = (props) => {
       <Header title={props.title} icon="save-outline"></Header>
       <div className="viewBody">
         <CustomEditor onChangeHandler={onChangeHandler}></CustomEditor>
+        <div className="off userinfo">{user.sub}</div>
         <div className="textGroup">
           <Input
             icon="fa-user"

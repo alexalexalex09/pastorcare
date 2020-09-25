@@ -11,6 +11,8 @@ var PersonSchema = new Schema(
     maidenName: String,
     birthday: Date,
     anniversary: Date,
+    phone: String,
+    address: String,
     occupations: [{ title: String, organization: String, start: Date }],
     relationships: [
       {
@@ -19,6 +21,7 @@ var PersonSchema = new Schema(
       },
     ],
     groups: [{ name: String }],
+    owner: String,
   },
   { collection: "people" }
 );

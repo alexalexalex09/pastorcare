@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import p from "../helpers/p";
 
 const Input = (props) => {
-  const [listItems, setListItems] = useState([]);
+  const propList = props.listItems || [];
+  console.log("listItems:", propList);
+  const [listItems, setListItems] = useState(propList);
   const [newListItem, setNewListItem] = useState("");
 
+  useEffect(() => {
+    if (propList.length > 0) {
+      setListItems(propList);
+    }
+  }, [propList]);
   const add = (listItem) => {
     if (listItems) {
       setListItems([...listItems, listItem]);
@@ -26,11 +33,12 @@ const Input = (props) => {
 
   const handleKeyPress = (value) => {
     setNewListItem(value);
-    console.log("list: ", props.list);
+    //console.log("list: ", props.list);
+    //TODO: Customize this for better handling of splitting off tags
     if (
       props.list !== "true" ||
       value === "" ||
-      value.substr(value.length - 1, 1) !== "," ||
+      value.substr(value.length - 1, 1) !== "," || //Look for a comma in the last position, if so, take the text as a string
       value.length < 2
     ) {
       return;
@@ -39,7 +47,6 @@ const Input = (props) => {
     setNewListItem("");
   };
 
-  //Need to customize setListItems so that it can see if a space has been added and customize what gets added
   return (
     <div className="inputField" id={props.id + "-field"}>
       <i className={"fas " + props.icon}></i>
@@ -63,7 +70,7 @@ const Input = (props) => {
       )}
       <div className={props.list ? "list" : "off"}>
         {listItems.map((listItem, index) => {
-          console.log("displaying LI: ", listItem);
+          //console.log("displaying LI: ", listItem);
           return (
             <span key={listItem.name}>
               {listItem.name}

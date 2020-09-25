@@ -21,7 +21,16 @@ export default {
   getNotes: (user) =>
     axios({
       method: "POST",
-      url: "/notes/add",
+      url: "/notes/all",
+      headers: {
+        "content-type": "application/json",
+      },
+      data: user,
+    }),
+  getPeople: (user) =>
+    axios({
+      method: "POST",
+      url: "/people/all",
       headers: {
         "content-type": "application/json",
       },

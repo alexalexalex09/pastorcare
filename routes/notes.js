@@ -44,6 +44,7 @@ router.post("/add", function (req, res) {
   note = b.checkAndAdd(req.body.tags, note, "tags");
   note = b.checkAndAdd(req.body.date, note, "date");
   note = b.checkAndAdd(req.body.people, note, "people");
+  note = b.checkAndAdd(req.body.owner, note, "owner");
   console.log("Note: ", note);
 
   new Note(note).save().then(
@@ -56,6 +57,13 @@ router.post("/add", function (req, res) {
       res.send({ err: err });
     }
   );
+});
+
+router.post("/all", function (req, res) {
+  Note.find({ owner: req.body.owner }).exec(function (err, curUsers) {
+    console.log(req.body.owner);
+    res.send(curUsers);
+  });
 });
 
 module.exports = router;

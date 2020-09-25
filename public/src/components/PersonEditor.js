@@ -17,7 +17,7 @@ const PersonEditor = (props) => {
   ) {
     //bhncvconsole.log("Name parsing works");
   } else {
-    throw new Error("Error parsing name");
+    throw new Error("Error parsing nsame");
   }
   //End Tests
 
@@ -27,6 +27,8 @@ const PersonEditor = (props) => {
     const birthday = h.findID("birthdayInput").value;
     const anniversary = h.findID("anniversaryInput").value;
     console.log("Children: ", h.sibling("#occupationInput", ".list").children);
+    const phone = h.findID("phoneInput").value;
+    const address = h.findID("addressInput").value;
     const occupations = p.getChildrenAsArray(
       h.sibling("#occupationInput", ".list").children
     );
@@ -55,7 +57,10 @@ const PersonEditor = (props) => {
       anniversary: anniversary,
       occupations: occupations,
       relationships: relationships,
+      phone: phone,
+      address: address,
       groups: groups,
+      owner: document.getElementById("auth0_sub").innerText,
     };
     console.log(person);
     api
@@ -112,7 +117,7 @@ const PersonEditor = (props) => {
             icon="fa-user"
             id={p.appendID(props.id, "personText", "-")}
             text="Name"
-            default="Name"
+            default={props.name || "Name"}
             type="text"
             hideLabel="true"
             autoComplete="true"
@@ -122,7 +127,7 @@ const PersonEditor = (props) => {
             icon="fa-gift"
             id={p.appendID(props.id, "birthdayInput", "-")}
             text="Birthday"
-            default="Birthday"
+            default={props.birthday || "Birthday"}
             type="date"
             hideLabel="true"
             autoComplete="false"
@@ -132,7 +137,7 @@ const PersonEditor = (props) => {
             icon="fa-ring"
             id={p.appendID(props.id, "anniversaryInput", "-")}
             text="Anniversary"
-            default="Anniversary"
+            default={props.anniversary || "Anniversary"}
             type="date"
             hideLabel="true"
             autoComplete="false"
@@ -143,6 +148,27 @@ const PersonEditor = (props) => {
             id={p.appendID(props.id, "occupationInput", "-")}
             text="Occupation"
             default="Occupation"
+            type="text"
+            hideLabel="true"
+            autoComplete="false"
+            list="true"
+            listItems={props.occupations}
+          ></Input>
+          <Input
+            icon="fa-phone"
+            id={p.appendID(props.id, "phoneInput", "-")}
+            text="Phone Number"
+            default="Phone Number"
+            type="text"
+            hideLabel="true"
+            autoComplete="false"
+            list="true"
+          ></Input>
+          <Input
+            icon="fa-home"
+            id={p.appendID(props.id, "addressInput", "-")}
+            text="Address"
+            default="Address"
             type="text"
             hideLabel="true"
             autoComplete="false"
