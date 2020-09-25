@@ -3,7 +3,7 @@ import p from "../helpers/p";
 
 const Input = (props) => {
   const propList = props.listItems || [];
-  console.log("listItems:", propList);
+  //console.log("props", props);
   const [listItems, setListItems] = useState(propList);
   const [newListItem, setNewListItem] = useState("");
 
@@ -12,6 +12,7 @@ const Input = (props) => {
       setListItems(propList);
     }
   }, [propList]);
+
   const add = (listItem) => {
     if (listItems) {
       setListItems([...listItems, listItem]);
@@ -33,7 +34,6 @@ const Input = (props) => {
 
   const handleKeyPress = (value) => {
     setNewListItem(value);
-    //console.log("list: ", props.list);
     //TODO: Customize this for better handling of splitting off tags
     if (
       props.list !== "true" ||
@@ -60,7 +60,7 @@ const Input = (props) => {
         placeholder={props.default}
         id={props.id}
         onChange={(e) => handleKeyPress(e.target.value)}
-        value={newListItem}
+        value={newListItem || props.value}
       />
       {props.autoComplete && (
         <div
@@ -72,7 +72,7 @@ const Input = (props) => {
         {listItems.map((listItem, index) => {
           //console.log("displaying LI: ", listItem);
           return (
-            <span key={listItem.name}>
+            <span key={index}>
               {listItem.name}
               <i
                 className="far fa-times-circle"

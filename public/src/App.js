@@ -19,6 +19,7 @@ import api from "./components/api";
 
 //Helpers
 //import h from "./helpers/h";
+//import p from "./helpers/p";
 
 function App() {
   const { isAuthenticated, logout } = useAuth0();
@@ -93,28 +94,34 @@ function App() {
       api
         .getPeople({ owner: document.getElementById("auth0_sub").innerText })
         .then((response) => {
-          //console.log(response.data);
+          console.log(response.data);
           let peopleArray = [];
+          let occupations = [];
+          let groups = [];
+
           response.data.forEach(function (e) {
-            let occupations = [];
             if (e.occupations) {
-              e.occupations.forEach((occ) => {
-                let arr = [];
-                Object.keys(occ).forEach((key) => {
-                  arr.push(occ[key]);
-                });
-                occupations.push({ name: arr.join("") });
+              occupations = e.occupations.map((e) => {
+                return { name: e.title };
               });
             }
-
+            if (e.groups) {
+              groups = e.groups.map((e) => {
+                return { name: e.name };
+              });
+            }
             peopleArray.push({
               id: e._id,
               name: e.firstName + " " + e.lastName,
               phone: e.phone || "",
               address: e.address || "",
-              occupations: occupations,
+              occupations: occupations || [],
+              groups: groups || [],
+              anniversary: e.anniversary || "",
+              birthday: e.birthday || "",
             });
           });
+          console.log(peopleArray);
           setPeople(peopleArray);
         })
         .catch((error) => {
@@ -213,6 +220,9 @@ function App() {
                       phone={e.phone}
                       address={e.address}
                       occupations={e.occupations}
+                      groups={e.groups}
+                      birthday={e.birthday}
+                      anniversary={e.anniversary}
                       key={i}
                     ></DirectoryItem>
                   );

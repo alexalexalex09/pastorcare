@@ -13,7 +13,7 @@ var PersonSchema = new Schema(
     anniversary: Date,
     phone: String,
     address: String,
-    occupations: [{ title: String, organization: String, start: Date }],
+    occupations: [{ title: String }],
     relationships: [
       {
         person: String,

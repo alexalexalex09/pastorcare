@@ -265,6 +265,7 @@ div#cloudB {
   text-decoration: underline;
   margin-bottom: 10px;
   font-size: 1.2em;
+  cursor: pointer;
 }
 
 .listItemPreview {
@@ -312,13 +313,19 @@ div#cloudB {
   justify-self: center;
 }
 
-.saveButton {
+.buttonGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2%;
+}
+
+.buttonGroup div {
   width: 100%;
   text-align: center;
   margin-top: 15px;
 }
 
-.saveButton button {
+.buttonGroup div button {
   width: 40vw;
   height: 2em;
   cursor: pointer;

@@ -23,6 +23,11 @@ const DirectoryItem = (props) => {
           id={props.id}
           name={props.name}
           occupations={props.occupations}
+          phone={props.phone}
+          address={props.address}
+          groups={props.groups}
+          birthday={props.birthday}
+          anniversary={props.anniversary}
         />
       </div>
     </div>

@@ -22,20 +22,16 @@ const PersonEditor = (props) => {
   //End Tests
 
   function addPerson() {
+    console.log(props);
     const name = h.findID("personText").value.split(" ");
     const { firstName, middleName, lastName } = parseName(name);
     const birthday = h.findID("birthdayInput").value;
     const anniversary = h.findID("anniversaryInput").value;
-    console.log("Children: ", h.sibling("#occupationInput", ".list").children);
     const phone = h.findID("phoneInput").value;
     const address = h.findID("addressInput").value;
     const occupations = p.getChildrenAsArray(
-      h.sibling("#occupationInput", ".list").children
+      h.sibling("#occupationInput", ".list")[0].children
     );
-    //const relationships = [];
-    /*const relationships = p.getChildrenAsArray(
-      h.sibling("#relationshipsInput", ".list").children
-    );*/
     let arr = [];
     document
       .querySelectorAll("#personView .multiInputItems")
@@ -47,7 +43,7 @@ const PersonEditor = (props) => {
       });
     const relationships = arr;
     const groups = p.getChildrenAsArray(
-      h.sibling("#groupsInput", ".list").children
+      h.sibling("#groupsInput", ".list")[0].children
     );
     const person = {
       firstName: firstName,
@@ -71,6 +67,12 @@ const PersonEditor = (props) => {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  function closeThis(e) {
+    e.parentElement.parentElement.parentElement.parentElement.classList.add(
+      "off"
+    );
   }
 
   /**
@@ -105,7 +107,7 @@ const PersonEditor = (props) => {
     <div className={p.appendID(props.className, "personEditor ", " ")}>
       <Header
         id={p.appendID(props.id, "personHeader", "-")}
-        title="New Person"
+        title={props.name || "New Person"}
         icon="save-outline"
       ></Header>
       <div className="viewBody">
@@ -127,7 +129,7 @@ const PersonEditor = (props) => {
             icon="fa-gift"
             id={p.appendID(props.id, "birthdayInput", "-")}
             text="Birthday"
-            default={props.birthday || "Birthday"}
+            value={props.birthday ? props.birthday.substr(0, 10) : "Birthday"}
             type="date"
             hideLabel="true"
             autoComplete="false"
@@ -137,7 +139,11 @@ const PersonEditor = (props) => {
             icon="fa-ring"
             id={p.appendID(props.id, "anniversaryInput", "-")}
             text="Anniversary"
-            default={props.anniversary || "Anniversary"}
+            value={
+              props.anniversary
+                ? props.anniversary.substr(0, 10)
+                : "Anniversary"
+            }
             type="date"
             hideLabel="true"
             autoComplete="false"
@@ -158,21 +164,21 @@ const PersonEditor = (props) => {
             icon="fa-phone"
             id={p.appendID(props.id, "phoneInput", "-")}
             text="Phone Number"
-            default="Phone Number"
+            default={props.phone || "Phone Number"}
             type="text"
             hideLabel="true"
             autoComplete="false"
-            list="true"
+            list="false"
           ></Input>
           <Input
             icon="fa-home"
             id={p.appendID(props.id, "addressInput", "-")}
             text="Address"
-            default="Address"
+            default={props.address || "Address"}
             type="text"
             hideLabel="true"
             autoComplete="false"
-            list="true"
+            list="false"
           ></Input>
           <MultiInput title="Relationships" list="true" id="relationshipInput">
             <Input
@@ -203,10 +209,16 @@ const PersonEditor = (props) => {
             hideLabel="true"
             autoComplete="false"
             list="true"
+            listItems={props.groups}
           ></Input>
         </div>
-        <div className="saveButton" onClick={addPerson}>
-          <button>Save</button>
+        <div className="buttonGroup">
+          <div className="saveButton" onClick={addPerson}>
+            <button>Save</button>
+          </div>
+          <div className="cancelButton" onClick={(e) => closeThis(e.target)}>
+            <button>Cancel</button>
+          </div>
         </div>
       </div>
     </div>

@@ -47,6 +47,9 @@ const equals = function (x, y) {
 };
 
 const h = {
+  find: function (query) {
+    return document.querySelectorAll(query);
+  },
   findOne: function (query) {
     return document.querySelectorAll(query);
   },
@@ -62,7 +65,7 @@ const h = {
   sibling: function (find, withSibling) {
     try {
       return document
-        .querySelectorAll(find)
+        .querySelectorAll(find)[0]
         .parentElement.querySelectorAll(withSibling);
     } catch {
       return document.querySelectorAll(find);
