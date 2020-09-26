@@ -89,7 +89,7 @@ const h = {
     }
     return found;
   },
-  openView: function (e, open, close) {
+  openView: function (open, close) {
     //open a view
     //e.preventDefault();
     const toOpen = h.findID(open);

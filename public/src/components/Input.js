@@ -60,7 +60,7 @@ const Input = (props) => {
         placeholder={props.default}
         id={props.id}
         onChange={(e) => handleKeyPress(e.target.value)}
-        value={newListItem || props.value}
+        value={newListItem}
       />
       {props.autoComplete && (
         <div

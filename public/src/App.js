@@ -98,6 +98,7 @@ function App() {
           let peopleArray = [];
           let occupations = [];
           let groups = [];
+          let relationships = [];
 
           response.data.forEach(function (e) {
             if (e.occupations) {
@@ -110,6 +111,11 @@ function App() {
                 return { name: e.name };
               });
             }
+            if (e.relationships) {
+              relationships = e.relationships.map((e) => {
+                return { person: e.person, relationship: e.relationship };
+              });
+            }
             peopleArray.push({
               id: e._id,
               name: e.firstName + " " + e.lastName,
@@ -119,6 +125,7 @@ function App() {
               groups: groups || [],
               anniversary: e.anniversary || "",
               birthday: e.birthday || "",
+              relationships: relationships || [],
             });
           });
           console.log(peopleArray);
@@ -213,21 +220,10 @@ function App() {
             <div className="viewBody">
               <div id="directory">
                 {people.map((e, i) => {
-                  return (
-                    <DirectoryItem
-                      id={e.id}
-                      name={e.name}
-                      phone={e.phone}
-                      address={e.address}
-                      occupations={e.occupations}
-                      groups={e.groups}
-                      birthday={e.birthday}
-                      anniversary={e.anniversary}
-                      key={i}
-                    ></DirectoryItem>
-                  );
+                  return <DirectoryItem {...e} key={i}></DirectoryItem>;
                 })}
               </div>
+              <div id="directoryAddNew"></div>
             </div>
           </div>
           <div className="view off" id="noteView">

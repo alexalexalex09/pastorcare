@@ -15,14 +15,27 @@ const PersonEditor = (props) => {
       expect: { firstName: "AB", middleName: "cd", lastName: "EFG hijk" },
     }).res
   ) {
-    //bhncvconsole.log("Name parsing works");
   } else {
-    throw new Error("Error parsing nsame");
+    throw new Error("Error parsing name");
+  }
+  let renderRelationshipTest = h.testFn({
+    test: { relationships: [{ person: "Joe", relationship: "Brother" }] },
+    fn: renderRelationships,
+    expect: { firstName: "AB", middleName: "cd", lastName: "EFG hijk" },
+  });
+  if (
+    renderRelationshipTest.resultContent[0].props.children[1].props.default ===
+      "Brother" &&
+    renderRelationshipTest.resultContent[0].props.children[0].props.default ===
+      "Joe"
+  ) {
+  } else {
+    console.log(renderRelationshipTest);
+    throw new Error("Error rendering relationship");
   }
   //End Tests
 
   function addPerson() {
-    console.log(props);
     const name = h.findID("personText").value.split(" ");
     const { firstName, middleName, lastName } = parseName(name);
     const birthday = h.findID("birthdayInput").value;
@@ -70,9 +83,27 @@ const PersonEditor = (props) => {
   }
 
   function closeThis(e) {
-    e.parentElement.parentElement.parentElement.parentElement.classList.add(
-      "off"
-    );
+    let view =
+      e.parentElement.parentElement.parentElement.parentElement.parentElement;
+    console.log(view.id);
+    if (view.id === "personView") {
+      h.openView("homeView", "personView");
+    } else {
+      if (e.parentElement.classList.contains("personEditor")) {
+        e.parentElement.classList.add("off");
+      } else {
+        closeEditor(e.parentElement);
+      }
+    }
+  }
+
+  function closeEditor(e) {
+    console.log("closing: ", e);
+    if (e.parentElement.classList.contains("personEditor")) {
+      e.parentElement.classList.add("off");
+    } else {
+      closeEditor(e.parentElement);
+    }
   }
 
   /**
@@ -101,6 +132,63 @@ const PersonEditor = (props) => {
         break;
     }
     return { firstName: firstName, middleName: middleName, lastName: lastName };
+  }
+
+  function renderRelationships(props) {
+    if (props.relationships) {
+      return props.relationships.map((e, i) => {
+        return (
+          <MultiInput
+            title="Relationships"
+            list="true"
+            id="relationshipInput"
+            key={i}
+          >
+            <Input
+              icon="fa-user"
+              id={p.appendID(props.id, "relationshipsPersonInput", "-")}
+              text="Person"
+              default={e.person || "Person"}
+              type="text"
+              hideLabel="true"
+              autoComplete="false"
+            ></Input>
+            <Input
+              icon="fa-project-diagram"
+              id={p.appendID(props.id, "relationshipsRelInput", "-")}
+              text="Relationship"
+              default={e.relationship || "Relationship"}
+              type="text"
+              hideLabel="true"
+              autoComplete="false"
+            ></Input>
+          </MultiInput>
+        );
+      });
+    } else {
+      return (
+        <MultiInput title="Relationships" list="true" id="relationshipInput">
+          <Input
+            icon="fa-user"
+            id={p.appendID(props.id, "relationshipsPersonInput", "-")}
+            text="Person"
+            default="Person"
+            type="text"
+            hideLabel="true"
+            autoComplete="false"
+          ></Input>
+          <Input
+            icon="fa-project-diagram"
+            id={p.appendID(props.id, "relationshipsRelInput", "-")}
+            text="Relationship"
+            default="Relationship"
+            type="text"
+            hideLabel="true"
+            autoComplete="false"
+          ></Input>
+        </MultiInput>
+      );
+    }
   }
 
   return (
@@ -180,26 +268,7 @@ const PersonEditor = (props) => {
             autoComplete="false"
             list="false"
           ></Input>
-          <MultiInput title="Relationships" list="true" id="relationshipInput">
-            <Input
-              icon="fa-user"
-              id={p.appendID(props.id, "relationshipsPersonInput", "-")}
-              text="Person"
-              default="Person"
-              type="text"
-              hideLabel="true"
-              autoComplete="false"
-            ></Input>
-            <Input
-              icon="fa-project-diagram"
-              id={p.appendID(props.id, "relationshipsRelInput", "-")}
-              text="Relationship"
-              default="Relationship"
-              type="text"
-              hideLabel="true"
-              autoComplete="false"
-            ></Input>
-          </MultiInput>
+          {renderRelationships(props)}
           <Input
             icon="fa-users"
             id={p.appendID(props.id, "groupsInput", "-")}

@@ -18,17 +18,7 @@ const DirectoryItem = (props) => {
       <div className="listItemPreview">
         <div className="directoryItemPhone">{props.phone}</div>
         <div className="directoryItemAddress">{props.address}</div>
-        <PersonEditor
-          className="off"
-          id={props.id}
-          name={props.name}
-          occupations={props.occupations}
-          phone={props.phone}
-          address={props.address}
-          groups={props.groups}
-          birthday={props.birthday}
-          anniversary={props.anniversary}
-        />
+        <PersonEditor className="off" {...props} />
       </div>
     </div>
   );

@@ -20,11 +20,7 @@ const Header = (props) => {
       <div
         className="homeButton backgroundImg"
         onClick={(e) =>
-          h.openView(
-            e,
-            "homeView",
-            h.notClass(h.findClass("view"), "off")[0].id
-          )
+          h.openView("homeView", h.notClass(h.findClass("view"), "off")[0].id)
         }
       ></div>
       <div className="mainTitle">
